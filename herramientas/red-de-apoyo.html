@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="faro-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red de apoyo · Faro</title>
+    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="../assets/css/faro-base.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="bg-base-100">
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar bg-neutral shadow-sm px-4 lg:px-8 sticky top-0 z-50">
+    <div class="navbar-start">
+        <a href="../index.html" class="flex items-center gap-2 text-neutral-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.5 3h-5z"/><rect x="9.5" y="5" width="5" height="2.5" rx="0.3"/><path d="M10 7.5L8.5 21h7L14 7.5z"/><path d="M9 13.5h6"/><path d="M6 21h12"/><path d="M16 5.5l2.5-1.3M16 6.8l2.6.4M8 5.5L5.5 4.2M8 6.8l-2.6.4"/>
+            </svg>
+            <span class="text-xl font-semibold font-display">Faro</span>
+        </a>
+    </div>
+    <div class="navbar-center hidden md:flex">
+        <ul class="menu menu-horizontal gap-1">
+            <li><a href="../index.html" class="text-neutral-content hover:text-accent">Inicio</a></li>
+            <li><a href="../herramientas.html" class="text-neutral-content hover:text-accent">Herramientas</a></li>
+            <li><a href="../sobre-faro.html" class="text-neutral-content hover:text-accent">Sobre Faro</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end">
+        <button id="theme-toggle" class="btn btn-ghost btn-circle text-neutral-content" aria-label="Cambiar tema">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
+    </div>
+</nav>
+
+<main class="relative overflow-hidden bg-base-200 faro-surface" style="min-height: calc(100vh - 64px);">
+    <div class="tool-bokeh-bg"></div>
+
+    <div class="relative max-w-xl mx-auto px-4 py-8 md:py-12">
+
+        <!-- ENTRADA -->
+        <section id="s-entrada" class="faro-screen active">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12 text-center">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-8">
+                    <h1 class="font-display text-3xl font-semibold text-base-content">Red de apoyo</h1>
+                    <p class="faro-instruction" style="color: var(--faro-text-secondary);">
+                        Tu red es más grande de lo que crees — solo que nunca la has dibujado.
+                        Vamos a mapear a quién acudes, según para qué.
+                    </p>
+                    <button id="btn-empezar" class="faro-btn-big faro-btn-primary">Mapear mi red</button>
+                    <button id="btn-ver-mapa" class="hidden faro-btn-big faro-btn-ghost">Ver mi mapa guardado</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PREGUNTA POR FUNCIÓN (dinámica) -->
+        <section id="s-funcion" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-5">
+                    <p id="funcion-posicion" class="text-sm font-semibold uppercase tracking-wide text-center" style="color: var(--faro-text-muted);"></p>
+                    <h2 id="funcion-pregunta" class="font-display text-2xl md:text-3xl font-semibold leading-snug text-base-content text-center"></h2>
+
+                    <div id="personas-agregadas" class="flex flex-wrap gap-2 justify-center"></div>
+
+                    <div class="space-y-3">
+                        <input type="text" id="campo-persona-nombre" class="faro-input" placeholder="Nombre">
+                        <input type="text" id="campo-persona-relacion" class="faro-input" placeholder="Relación (ej: amiga, mamá, colega)">
+                        <input type="tel" id="campo-persona-telefono" class="faro-input hidden" placeholder="Teléfono (opcional, para llamarle en crisis)">
+                        <button id="btn-agregar-persona" class="faro-btn-big faro-btn-ghost">Agregar</button>
+                    </div>
+
+                    <button id="btn-funcion-seguir" class="faro-btn-big faro-btn-primary">Continuar</button>
+                    <p class="text-sm text-center" style="color: var(--faro-text-muted);">Puedes agregar más de una persona, o ninguna.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAPA FINAL -->
+        <section id="s-mapa" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">Tu red, dibujada</h2>
+                    <div class="flex justify-center overflow-x-auto">
+                        <svg id="mapa" viewBox="0 0 340 340" width="340" height="340" role="img" aria-label="Mapa de tu red de apoyo con las personas alrededor tuyo"></svg>
+                    </div>
+                    <div id="leyenda" class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-sm"></div>
+                    <div id="lectura-mapa" class="space-y-1 text-base" style="color: var(--faro-text-secondary);"></div>
+                    <div id="vacios" class="space-y-2"></div>
+                    <div class="p-4 rounded-xl text-base" style="background: var(--faro-border-subtle); color: var(--faro-text-secondary);">
+                        Tus contactos para momentos de angustia quedaron conectados al
+                        <a href="protocolo-de-crisis.html" class="text-primary underline">Protocolo de crisis</a>:
+                        aparecerán ahí con botón de llamada directa.
+                    </div>
+                    <div class="space-y-3">
+                        <button id="btn-rehacer" class="faro-btn-big faro-btn-ghost">Volver a mapear</button>
+                        <a href="../index.html" class="faro-btn-big faro-btn-primary">Volver al inicio</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/red-de-apoyo.js"></script>
+</body>
+</html>

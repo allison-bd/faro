@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="faro-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relajación muscular progresiva · Faro</title>
+    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="../assets/css/faro-base.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="bg-base-100">
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar bg-neutral shadow-sm px-4 lg:px-8 sticky top-0 z-50">
+    <div class="navbar-start">
+        <a href="../index.html" class="flex items-center gap-2 text-neutral-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.5 3h-5z"/><rect x="9.5" y="5" width="5" height="2.5" rx="0.3"/><path d="M10 7.5L8.5 21h7L14 7.5z"/><path d="M9 13.5h6"/><path d="M6 21h12"/><path d="M16 5.5l2.5-1.3M16 6.8l2.6.4M8 5.5L5.5 4.2M8 6.8l-2.6.4"/>
+            </svg>
+            <span class="text-xl font-semibold font-display">Faro</span>
+        </a>
+    </div>
+    <div class="navbar-center hidden md:flex">
+        <ul class="menu menu-horizontal gap-1">
+            <li><a href="../index.html" class="text-neutral-content hover:text-accent">Inicio</a></li>
+            <li><a href="../herramientas.html" class="text-neutral-content hover:text-accent">Herramientas</a></li>
+            <li><a href="../sobre-faro.html" class="text-neutral-content hover:text-accent">Sobre Faro</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end">
+        <button id="theme-toggle" class="btn btn-ghost btn-circle text-neutral-content" aria-label="Cambiar tema">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
+    </div>
+</nav>
+
+<main class="relative overflow-hidden bg-base-200 faro-surface" style="min-height: calc(100vh - 64px);">
+    <div class="tool-bokeh-bg"></div>
+    <div class="tool-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" style="width: 480px; height: 480px;"></div>
+
+    <div class="relative max-w-2xl mx-auto px-4 py-8 md:py-12">
+
+        <!-- ENTRADA: SELECCIÓN DE VERSIÓN -->
+        <section id="s-entrada" class="faro-screen active">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h1 class="font-display text-3xl font-semibold text-base-content text-center">Relajación muscular</h1>
+                    <p class="faro-instruction text-center" style="color: var(--faro-text-secondary);">
+                        Tensar para soltar. Tu cuerpo sabe hacerlo — solo hay que recordárselo.
+                    </p>
+                    <div class="space-y-3">
+                        <button id="btn-rapida" class="faro-option-card w-full p-5">
+                            <span class="font-semibold text-lg text-primary">Rápida · 5 minutos</span>
+                            <span class="block text-base mt-1" style="color: var(--faro-text-secondary);">Manos, hombros y mandíbula: donde más se guarda la tensión.</span>
+                        </button>
+                        <button id="btn-completa" class="faro-option-card w-full p-5">
+                            <span class="font-semibold text-lg text-primary">Completa · 15-20 minutos</span>
+                            <span class="block text-base mt-1" style="color: var(--faro-text-secondary);">Los 13 grupos musculares, de las manos a los pies.</span>
+                        </button>
+                    </div>
+                    <p class="text-base text-center" style="color: var(--faro-text-muted);">
+                        Busca una posición cómoda, sentado/a o acostado/a.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EJERCICIO -->
+        <section id="s-ejercicio" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative grid md:grid-cols-2 gap-8 items-center">
+
+                    <!-- SILUETA CORPORAL: la zona activa se enciende, las completadas se apagan en verde suave -->
+                    <div class="flex justify-center">
+                        <svg id="silueta" viewBox="0 0 200 312" width="170" height="266" aria-hidden="true">
+                            <!-- contorno de referencia -->
+                            <ellipse cx="100" cy="42" rx="30" ry="34" fill="none" stroke="var(--faro-border)" stroke-width="1.5"/>
+                            <!-- zonas -->
+                            <g id="z-frente"><rect x="80" y="22" width="40" height="12" rx="6" class="faro-body-zone"/></g>
+                            <g id="z-ojos"><rect x="80" y="37" width="40" height="12" rx="6" class="faro-body-zone"/></g>
+                            <g id="z-mandibula"><rect x="83" y="52" width="34" height="12" rx="6" class="faro-body-zone"/></g>
+                            <g id="z-cuello"><rect x="90" y="68" width="20" height="12" rx="5" class="faro-body-zone"/></g>
+                            <g id="z-hombros"><rect x="56" y="82" width="88" height="15" rx="7" class="faro-body-zone"/></g>
+                            <g id="z-pecho"><rect x="70" y="99" width="60" height="28" rx="9" class="faro-body-zone"/></g>
+                            <g id="z-biceps">
+                                <rect x="40" y="99" width="17" height="36" rx="8" class="faro-body-zone"/>
+                                <rect x="143" y="99" width="17" height="36" rx="8" class="faro-body-zone"/>
+                            </g>
+                            <g id="z-abdomen"><rect x="72" y="129" width="56" height="28" rx="9" class="faro-body-zone"/></g>
+                            <g id="z-manos">
+                                <rect x="38" y="137" width="16" height="48" rx="8" class="faro-body-zone"/>
+                                <rect x="146" y="137" width="16" height="48" rx="8" class="faro-body-zone"/>
+                            </g>
+                            <g id="z-gluteos"><rect x="70" y="159" width="60" height="22" rx="10" class="faro-body-zone"/></g>
+                            <g id="z-muslos">
+                                <rect x="72" y="184" width="24" height="52" rx="11" class="faro-body-zone"/>
+                                <rect x="104" y="184" width="24" height="52" rx="11" class="faro-body-zone"/>
+                            </g>
+                            <g id="z-pantorrillas">
+                                <rect x="75" y="240" width="19" height="46" rx="9" class="faro-body-zone"/>
+                                <rect x="106" y="240" width="19" height="46" rx="9" class="faro-body-zone"/>
+                            </g>
+                            <g id="z-pies">
+                                <rect x="70" y="290" width="26" height="12" rx="6" class="faro-body-zone"/>
+                                <rect x="104" y="290" width="26" height="12" rx="6" class="faro-body-zone"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <!-- INSTRUCCIÓN + TIMER -->
+                    <div class="text-center space-y-6">
+                        <p id="nombre-grupo" class="text-sm font-semibold uppercase tracking-wide" style="color: var(--faro-text-muted);"></p>
+                        <p id="instruccion" class="font-display text-2xl leading-snug text-base-content" aria-live="polite"></p>
+
+                        <!-- Anillo que se llena (tensión) y se vacía (soltar) -->
+                        <div class="relative inline-block">
+                            <svg width="130" height="130" viewBox="0 0 130 130">
+                                <circle class="faro-ring-track" cx="65" cy="65" r="56" stroke-width="10"/>
+                                <circle id="anillo" class="faro-ring-fill" cx="65" cy="65" r="56" stroke-width="10"
+                                        stroke-dasharray="351.9" stroke-dashoffset="351.9"/>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span id="segundos" class="text-3xl font-bold text-primary font-display"></span>
+                            </div>
+                        </div>
+
+                        <p id="fase-etiqueta" class="faro-instruction font-semibold text-primary"></p>
+
+                        <button id="btn-detener" class="text-base underline" style="color: var(--faro-text-muted);">Detener</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CIERRE -->
+        <section id="s-cierre" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12 text-center">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-8">
+                    <div class="flex justify-center text-success">
+                        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+                    </div>
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content">Tu cuerpo soltó lo que venía cargando</h2>
+                    <p class="faro-instruction" style="color: var(--faro-text-secondary);">
+                        Quédate un momento así, sin hacer nada. La calma también se entrena.
+                    </p>
+                    <div class="space-y-3">
+                        <button id="btn-repetir" class="faro-btn-big faro-btn-ghost">Hacerlo de nuevo</button>
+                        <a href="../index.html" class="faro-btn-big faro-btn-primary">Volver al inicio</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/relajacion-muscular.js"></script>
+</body>
+</html>

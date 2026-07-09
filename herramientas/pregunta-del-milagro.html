@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="faro-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregunta del milagro · Faro</title>
+    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="../assets/css/faro-base.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="bg-base-100">
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar bg-neutral shadow-sm px-4 lg:px-8 sticky top-0 z-50">
+    <div class="navbar-start">
+        <a href="../index.html" class="flex items-center gap-2 text-neutral-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.5 3h-5z"/><rect x="9.5" y="5" width="5" height="2.5" rx="0.3"/><path d="M10 7.5L8.5 21h7L14 7.5z"/><path d="M9 13.5h6"/><path d="M6 21h12"/><path d="M16 5.5l2.5-1.3M16 6.8l2.6.4M8 5.5L5.5 4.2M8 6.8l-2.6.4"/>
+            </svg>
+            <span class="text-xl font-semibold font-display">Faro</span>
+        </a>
+    </div>
+    <div class="navbar-center hidden md:flex">
+        <ul class="menu menu-horizontal gap-1">
+            <li><a href="../index.html" class="text-neutral-content hover:text-accent">Inicio</a></li>
+            <li><a href="../herramientas.html" class="text-neutral-content hover:text-accent">Herramientas</a></li>
+            <li><a href="../sobre-faro.html" class="text-neutral-content hover:text-accent">Sobre Faro</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end">
+        <button id="theme-toggle" class="btn btn-ghost btn-circle text-neutral-content" aria-label="Cambiar tema">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
+    </div>
+</nav>
+
+<main class="relative overflow-hidden" style="min-height: calc(100vh - 64px); background: var(--faro-gradient-surface);">
+    <div class="tool-bokeh-bg"></div>
+
+    <div class="relative max-w-xl mx-auto px-4 py-8 md:py-12">
+
+        <!-- PANTALLA 1: LA FORMULACIÓN INMERSIVA -->
+        <section id="s-1" class="faro-screen active">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-14 text-center">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-10">
+                    <p class="font-display text-2xl md:text-3xl leading-relaxed text-base-content">
+                        Supón que esta noche, mientras duermes, ocurre un milagro.
+                        Los problemas que te trajeron aquí se resuelven.
+                        Pero como estabas dormido/a, no sabes que pasó.
+                        Mañana por la mañana, ¿cuál sería la primera pequeña señal de que algo cambió?
+                    </p>
+                    <button class="faro-btn-big faro-btn-primary" data-siguiente="s-2">Imaginar ese mañana</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 2 -->
+        <section id="s-2" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">¿Qué sería lo primero diferente que notarías al despertar?</h2>
+                    <textarea id="campo-despertar" class="faro-textarea"></textarea>
+                    <button class="faro-btn-big faro-btn-primary" data-siguiente="s-3">Continuar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 3 -->
+        <section id="s-3" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">¿Qué harías diferente durante la mañana?</h2>
+                    <textarea id="campo-manana" class="faro-textarea"></textarea>
+                    <button class="faro-btn-big faro-btn-primary" data-siguiente="s-4">Continuar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 4 -->
+        <section id="s-4" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold leading-snug text-base-content text-center">¿Quién sería la primera persona en notar el cambio? ¿Qué notaría de diferente en ti?</h2>
+                    <textarea id="campo-persona" class="faro-textarea"></textarea>
+                    <button class="faro-btn-big faro-btn-primary" data-siguiente="s-5">Continuar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 5 -->
+        <section id="s-5" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">¿Qué otras cosas cambiarían durante tu día?</h2>
+                    <textarea id="campo-dia" class="faro-textarea"></textarea>
+                    <button class="faro-btn-big faro-btn-primary" data-siguiente="s-6">Continuar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 6: EL PUENTE -->
+        <section id="s-6" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold leading-snug text-base-content text-center">
+                        ¿Hay algo de lo que describiste que ya esté pasando, aunque sea un poco?
+                    </h2>
+                    <textarea id="campo-puente" class="faro-textarea"></textarea>
+                    <button id="btn-terminar" class="faro-btn-big faro-btn-primary">Ver mi mañana después del milagro</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL -->
+        <section id="s-final" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">Tu vida después del milagro</h2>
+                    <div id="resumen-milagro" class="p-5 rounded-2xl space-y-3 faro-instruction" style="background: var(--faro-border-subtle); color: var(--color-base-content);"></div>
+                    <div class="space-y-3">
+                        <button id="btn-guardar" class="faro-btn-big faro-btn-primary">Guardar en mi álbum</button>
+                        <p id="guardado" class="hidden text-base text-center p-3 rounded-xl" style="background: var(--faro-success-bg); color: var(--color-success);">Guardado.</p>
+                        <a href="diario-de-excepciones.html" class="faro-btn-big faro-btn-ghost">¿Algo de esto ya está pasando? Regístralo en tu Diario de excepciones</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/pregunta-del-milagro.js"></script>
+</body>
+</html>

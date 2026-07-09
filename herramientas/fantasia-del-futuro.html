@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="faro-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasía del futuro · Faro</title>
+    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="../assets/css/faro-base.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="bg-base-100">
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar bg-neutral shadow-sm px-4 lg:px-8 sticky top-0 z-50">
+    <div class="navbar-start">
+        <a href="../index.html" class="flex items-center gap-2 text-neutral-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.5 3h-5z"/><rect x="9.5" y="5" width="5" height="2.5" rx="0.3"/><path d="M10 7.5L8.5 21h7L14 7.5z"/><path d="M9 13.5h6"/><path d="M6 21h12"/><path d="M16 5.5l2.5-1.3M16 6.8l2.6.4M8 5.5L5.5 4.2M8 6.8l-2.6.4"/>
+            </svg>
+            <span class="text-xl font-semibold font-display">Faro</span>
+        </a>
+    </div>
+    <div class="navbar-center hidden md:flex">
+        <ul class="menu menu-horizontal gap-1">
+            <li><a href="../index.html" class="text-neutral-content hover:text-accent">Inicio</a></li>
+            <li><a href="../herramientas.html" class="text-neutral-content hover:text-accent">Herramientas</a></li>
+            <li><a href="../sobre-faro.html" class="text-neutral-content hover:text-accent">Sobre Faro</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end">
+        <button id="theme-toggle" class="btn btn-ghost btn-circle text-neutral-content" aria-label="Cambiar tema">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
+    </div>
+</nav>
+
+<main class="relative overflow-hidden" style="min-height: calc(100vh - 64px); background: var(--faro-gradient-surface);">
+    <div class="tool-bokeh-bg"></div>
+
+    <div class="relative max-w-xl mx-auto px-4 py-8 md:py-12">
+
+        <!-- ESCRITURA LIBRE -->
+        <section id="s-escritura" class="faro-screen active">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h1 class="font-display text-3xl font-semibold text-base-content text-center">Fantasía del futuro</h1>
+                    <p class="faro-instruction" style="color: var(--faro-text-secondary);">
+                        Cierra los ojos un momento. Sin pensar en lo que es posible o imposible, imagina:
+                        ¿dónde te ves en 7 años? ¿Qué estás haciendo? ¿Con quién estás? ¿Cómo te sientes?
+                        No hay respuestas correctas o incorrectas. Escribe lo que aparezca.
+                    </p>
+
+                    <!-- Timer de referencia: opcional, nunca obligatorio -->
+                    <div class="flex items-center justify-between gap-3 flex-wrap">
+                        <label class="flex items-center gap-2 cursor-pointer text-base" style="color: var(--faro-text-secondary);">
+                            <input type="checkbox" id="chk-timer" class="toggle toggle-primary toggle-sm">
+                            Temporizador de referencia
+                        </label>
+                        <div id="control-timer" class="hidden flex items-center gap-3">
+                            <div class="flex gap-1">
+                                <button class="faro-chip text-sm selected opcion-min" data-min="10">10 min</button>
+                                <button class="faro-chip text-sm opcion-min" data-min="15">15 min</button>
+                            </div>
+                            <span id="tiempo-ref" class="font-semibold text-primary font-display text-lg">10:00</span>
+                        </div>
+                    </div>
+
+                    <textarea id="campo-fantasia" class="faro-textarea" style="min-height: 16rem;"
+                              placeholder="En 7 años me veo..."></textarea>
+
+                    <button id="btn-guardar" class="faro-btn-big faro-btn-primary">Guardar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CIERRE -->
+        <section id="s-cierre" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12 text-center">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-8">
+                    <div class="flex justify-center text-primary">
+                        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6z"/></svg>
+                    </div>
+                    <p class="font-display text-2xl md:text-3xl leading-relaxed text-base-content">
+                        Lo que escribiste no es un plan — es una brújula.<br>Muestra lo que te importa.
+                    </p>
+                    <div class="space-y-3">
+                        <button id="btn-releer" class="faro-btn-big faro-btn-ghost">Releer lo que escribí</button>
+                        <a href="../index.html" class="faro-btn-big faro-btn-primary">Volver al inicio</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/fantasia-del-futuro.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="faro-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brújula de valores · Faro</title>
+    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="../assets/css/faro-base.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="bg-base-100">
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar bg-neutral shadow-sm px-4 lg:px-8 sticky top-0 z-50">
+    <div class="navbar-start">
+        <a href="../index.html" class="flex items-center gap-2 text-neutral-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.5 3h-5z"/><rect x="9.5" y="5" width="5" height="2.5" rx="0.3"/><path d="M10 7.5L8.5 21h7L14 7.5z"/><path d="M9 13.5h6"/><path d="M6 21h12"/><path d="M16 5.5l2.5-1.3M16 6.8l2.6.4M8 5.5L5.5 4.2M8 6.8l-2.6.4"/>
+            </svg>
+            <span class="text-xl font-semibold font-display">Faro</span>
+        </a>
+    </div>
+    <div class="navbar-center hidden md:flex">
+        <ul class="menu menu-horizontal gap-1">
+            <li><a href="../index.html" class="text-neutral-content hover:text-accent">Inicio</a></li>
+            <li><a href="../herramientas.html" class="text-neutral-content hover:text-accent">Herramientas</a></li>
+            <li><a href="../sobre-faro.html" class="text-neutral-content hover:text-accent">Sobre Faro</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end">
+        <button id="theme-toggle" class="btn btn-ghost btn-circle text-neutral-content" aria-label="Cambiar tema">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
+    </div>
+</nav>
+
+<main class="relative overflow-hidden bg-base-200 faro-surface" style="min-height: calc(100vh - 64px);">
+    <div class="tool-bokeh-bg"></div>
+
+    <div class="relative max-w-xl mx-auto px-4 py-8 md:py-12">
+
+        <!-- ENTRADA -->
+        <section id="s-entrada" class="faro-screen active">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12 text-center">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-8">
+                    <h1 class="font-display text-3xl font-semibold text-base-content">Brújula de valores</h1>
+                    <p class="faro-instruction" style="color: var(--faro-text-secondary);">
+                        Los valores no son metas que se cumplen: son direcciones en las que se camina.
+                        Esta brújula no te dice dónde estás — te dice hacia dónde quieres ir.
+                    </p>
+                    <button id="btn-empezar" class="faro-btn-big faro-btn-primary">Explorar mis 6 áreas</button>
+                    <button id="btn-ver-brujula" class="hidden faro-btn-big faro-btn-ghost">Ver mi última brújula</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ÁREA (dinámica) -->
+        <section id="s-area" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-5">
+                    <p id="area-posicion" class="text-sm font-semibold uppercase tracking-wide text-center" style="color: var(--faro-text-muted);"></p>
+                    <div id="area-icono" class="flex justify-center text-primary"></div>
+                    <h2 id="area-nombre" class="font-display text-3xl font-semibold text-base-content text-center"></h2>
+
+                    <div>
+                        <label class="block font-medium text-base-content mb-2">¿Qué tipo de persona quieres ser en esta área?</label>
+                        <input type="text" id="campo-persona" class="faro-input" placeholder="Ej: presente, cariñoso/a, honesto/a">
+                    </div>
+                    <div>
+                        <label class="block font-medium text-base-content mb-2">¿Qué dirección quieres tomar?</label>
+                        <input type="text" id="campo-direccion" class="faro-input" placeholder="Ej: estar más presente con mi familia, aprender algo nuevo">
+                    </div>
+                    <div class="text-center space-y-2">
+                        <label class="block font-medium text-base-content">Del 0 al 10, ¿cuánto estás viviendo según este valor hoy?</label>
+                        <div class="text-5xl font-bold text-primary font-display" id="valor-area">5</div>
+                        <input type="range" id="slider-area" class="faro-slider" min="0" max="10" value="5">
+                    </div>
+                    <div>
+                        <label class="block font-medium text-base-content mb-2">¿Qué acción pequeña podrías hacer ESTA SEMANA en esta dirección?</label>
+                        <input type="text" id="campo-accion" class="faro-input" placeholder="Ej: llamar a mi mamá, caminar 15 min, leer 10 páginas">
+                    </div>
+
+                    <button id="btn-area-seguir" class="faro-btn-big faro-btn-primary">Continuar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULTADO: RADAR -->
+        <section id="s-radar" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">Tu brújula</h2>
+                    <div class="flex justify-center">
+                        <svg id="radar" viewBox="0 0 240 240" width="280" height="280" role="img" aria-label="Radar con tu nivel actual en las 6 áreas de vida"></svg>
+                    </div>
+                    <div id="lectura-radar" class="space-y-1 text-base" style="color: var(--faro-text-secondary);"></div>
+                    <p class="text-base" style="color: var(--faro-text-muted);">
+                        Las áreas con menos puntaje no son problemas: son espacio para crecer.
+                    </p>
+
+                    <div>
+                        <h3 class="font-semibold text-lg text-base-content mb-2">Tus compromisos de la semana</h3>
+                        <ul id="lista-compromisos" class="space-y-2"></ul>
+                    </div>
+
+                    <div class="space-y-3">
+                        <button id="btn-guardar" class="faro-btn-big faro-btn-primary">Guardar mi brújula</button>
+                        <p id="guardado" class="hidden text-base text-center p-3 rounded-xl" style="background: var(--faro-success-bg); color: var(--color-success);">
+                            Guardada. Vuelve en una semana a ver cómo caminaste.
+                        </p>
+                        <a href="constructor-de-objetivos.html" class="faro-btn-big faro-btn-ghost">Convertir un compromiso en objetivo concreto</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/brujula-de-valores.js"></script>
+</body>
+</html>

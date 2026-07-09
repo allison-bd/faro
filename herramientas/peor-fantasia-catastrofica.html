@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="faro-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media hora rumiatoria · Faro</title>
+    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="../assets/css/faro-base.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="bg-base-100">
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar bg-neutral shadow-sm px-4 lg:px-8 sticky top-0 z-50">
+    <div class="navbar-start">
+        <a href="../index.html" class="flex items-center gap-2 text-neutral-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.5 3h-5z"/><rect x="9.5" y="5" width="5" height="2.5" rx="0.3"/><path d="M10 7.5L8.5 21h7L14 7.5z"/><path d="M9 13.5h6"/><path d="M6 21h12"/><path d="M16 5.5l2.5-1.3M16 6.8l2.6.4M8 5.5L5.5 4.2M8 6.8l-2.6.4"/>
+            </svg>
+            <span class="text-xl font-semibold font-display">Faro</span>
+        </a>
+    </div>
+    <div class="navbar-center hidden md:flex">
+        <ul class="menu menu-horizontal gap-1">
+            <li><a href="../index.html" class="text-neutral-content hover:text-accent">Inicio</a></li>
+            <li><a href="../herramientas.html" class="text-neutral-content hover:text-accent">Herramientas</a></li>
+            <li><a href="../sobre-faro.html" class="text-neutral-content hover:text-accent">Sobre Faro</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end">
+        <button id="theme-toggle" class="btn btn-ghost btn-circle text-neutral-content" aria-label="Cambiar tema">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
+    </div>
+</nav>
+
+<main class="relative overflow-hidden bg-base-200 faro-surface" style="min-height: calc(100vh - 64px);">
+    <div class="tool-bokeh-bg"></div>
+
+    <div class="relative max-w-xl mx-auto px-4 py-8 md:py-12">
+
+        <!-- Advertencia SIEMPRE visible -->
+        <div class="p-4 rounded-xl text-base mb-6" style="background: var(--faro-warning-bg); color: var(--color-warning); border: 1px solid var(--color-warning);" role="note">
+            <strong>Antes de empezar:</strong> Esta técnica puede generar ansiedad al principio. Es normal.
+            Si es tu primera vez, considera hacerlo con acompañamiento profesional.
+        </div>
+
+        <!-- ENTRADA: SELECTOR DE VARIANTE -->
+        <section id="s-entrada" class="faro-screen active">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h1 class="font-display text-3xl font-semibold text-base-content text-center">Media hora rumiatoria</h1>
+                    <p class="faro-instruction text-center" style="color: var(--faro-text-secondary);">
+                        Preocuparse a propósito, en un horario fijo. Cuando la preocupación deja de ser
+                        involuntaria, pierde su poder.
+                    </p>
+                    <div class="space-y-3">
+                        <button id="btn-fantasia" class="faro-option-card w-full p-5">
+                            <span class="font-semibold text-lg text-primary block">Peor fantasía</span>
+                            <span class="text-base" style="color: var(--faro-text-secondary);">A solas, con los ojos cerrados, provocarte el peor miedo posible durante 30 minutos.</span>
+                        </button>
+                        <button id="btn-escritura" class="faro-option-card w-full p-5">
+                            <span class="font-semibold text-lg text-primary block">Escritura rumiatoria</span>
+                            <span class="text-base" style="color: var(--faro-text-secondary);">Escribir todas las ideas negativas durante 30 minutos, sin filtrar ni ordenar.</span>
+                        </button>
+                    </div>
+                    <button id="btn-registro" class="block mx-auto text-base underline" style="color: var(--faro-text-muted);">Ver mis sesiones</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SESIÓN CON TIMER -->
+        <section id="s-sesion" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10 text-center">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <p id="instruccion-sesion" class="faro-instruction font-medium text-base-content"></p>
+
+                    <!-- Timer visual de 30 min: grande y central -->
+                    <div class="relative inline-block">
+                        <svg width="210" height="210" viewBox="0 0 210 210">
+                            <circle class="faro-ring-track" cx="105" cy="105" r="92" stroke-width="12"/>
+                            <circle id="anillo-timer" class="faro-ring-fill" cx="105" cy="105" r="92" stroke-width="12"
+                                    stroke-dasharray="578" stroke-dashoffset="0"/>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span id="tiempo-restante" class="text-4xl font-bold text-primary font-display">30:00</span>
+                        </div>
+                    </div>
+
+                    <textarea id="campo-escritura" class="faro-textarea hidden text-left" style="min-height: 10rem;"
+                              placeholder="Escribe aquí. Sin filtro, sin orden, sin edición."></textarea>
+
+                    <button id="btn-detener" class="text-base underline" style="color: var(--faro-text-muted);">Detener la sesión</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CIERRE FANTASÍA -->
+        <section id="s-fin-fantasia" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12 text-center">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-8">
+                    <p class="font-display text-3xl leading-relaxed text-base-content">
+                        Detente. Lávate la cara con agua fría.<br>Vuelve a lo que estabas haciendo.
+                    </p>
+                    <div class="space-y-3">
+                        <input type="text" id="nota-fantasia" class="faro-input" placeholder="Nota opcional sobre la sesión">
+                        <button id="btn-guardar-fantasia" class="faro-btn-big faro-btn-primary">Guardar sesión</button>
+                        <a href="../index.html" class="faro-btn-big faro-btn-ghost">Volver al inicio</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CIERRE ESCRITURA: RITUAL -->
+        <section id="s-fin-escritura" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12 text-center">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-8">
+                    <div id="ritual-leer">
+                        <p class="font-display text-2xl leading-relaxed text-base-content mb-6">¿Quieres leer lo que escribiste en voz alta?</p>
+                        <div class="flex justify-center gap-3">
+                            <button id="leer-si" class="faro-chip">Sí, lo voy a leer</button>
+                            <button id="leer-no" class="faro-chip">No</button>
+                        </div>
+                    </div>
+                    <div id="ritual-borrar" class="hidden">
+                        <p class="font-display text-2xl leading-relaxed text-base-content mb-6">¿Quieres borrar lo que escribiste?</p>
+                        <div class="flex justify-center gap-3">
+                            <button id="borrar-si" class="faro-chip">Sí, borrarlo</button>
+                            <button id="borrar-no" class="faro-chip">No, conservarlo</button>
+                        </div>
+                    </div>
+                    <div id="ritual-fin" class="hidden space-y-4">
+                        <p id="mensaje-ritual" class="font-display text-2xl leading-relaxed text-base-content"></p>
+                        <input type="text" id="nota-escritura" class="faro-input" placeholder="Nota opcional sobre la sesión">
+                        <button id="btn-guardar-escritura" class="faro-btn-big faro-btn-primary">Guardar sesión</button>
+                        <a href="../index.html" class="faro-btn-big faro-btn-ghost">Volver al inicio</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- REGISTRO DE SESIONES -->
+        <section id="s-registro" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">Tus sesiones</h2>
+                    <p id="registro-vacio" class="hidden faro-instruction text-center" style="color: var(--faro-text-secondary);">Aún no has hecho ninguna sesión.</p>
+                    <div id="lista-sesiones" class="space-y-3"></div>
+                    <button id="btn-volver" class="faro-btn-big faro-btn-ghost">Volver</button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/peor-fantasia.js"></script>
+</body>
+</html>

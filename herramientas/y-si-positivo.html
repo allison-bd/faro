@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="faro-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"¿Y si...?" Positivo · Faro</title>
+    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="../assets/css/faro-base.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="bg-base-100">
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar bg-neutral shadow-sm px-4 lg:px-8 sticky top-0 z-50">
+    <div class="navbar-start">
+        <a href="../index.html" class="flex items-center gap-2 text-neutral-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.5 3h-5z"/><rect x="9.5" y="5" width="5" height="2.5" rx="0.3"/><path d="M10 7.5L8.5 21h7L14 7.5z"/><path d="M9 13.5h6"/><path d="M6 21h12"/><path d="M16 5.5l2.5-1.3M16 6.8l2.6.4M8 5.5L5.5 4.2M8 6.8l-2.6.4"/>
+            </svg>
+            <span class="text-xl font-semibold font-display">Faro</span>
+        </a>
+    </div>
+    <div class="navbar-center hidden md:flex">
+        <ul class="menu menu-horizontal gap-1">
+            <li><a href="../index.html" class="text-neutral-content hover:text-accent">Inicio</a></li>
+            <li><a href="../herramientas.html" class="text-neutral-content hover:text-accent">Herramientas</a></li>
+            <li><a href="../sobre-faro.html" class="text-neutral-content hover:text-accent">Sobre Faro</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end">
+        <button id="theme-toggle" class="btn btn-ghost btn-circle text-neutral-content" aria-label="Cambiar tema">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
+    </div>
+</nav>
+
+<main class="relative overflow-hidden bg-base-200 faro-surface" style="min-height: calc(100vh - 64px);">
+    <div class="tool-bokeh-bg"></div>
+
+    <div class="relative max-w-xl mx-auto px-4 py-8 md:py-12">
+
+        <!-- PANTALLA 1: PESIMISTA (el automático) -->
+        <section id="s-1" class="faro-screen active">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h1 class="font-display text-3xl font-semibold text-base-content text-center">"¿Y si...?" Positivo</h1>
+                    <label for="campo-pesimista" class="block font-medium text-base-content">¿Cuál es tu "¿Y si...?" negativo?</label>
+                    <textarea id="campo-pesimista" class="faro-textarea" placeholder="Ej: ¿Y si fracaso en la entrevista?"></textarea>
+                    <button id="btn-1" class="faro-btn-big faro-btn-primary">Continuar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 2: OPTIMISTA -->
+        <section id="s-2" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">Ahora dalo vuelta: ¿Y si sale BIEN?</h2>
+                    <textarea id="campo-optimista" class="faro-textarea" placeholder="Ej: ¿Y si me va muy bien y quedo seleccionado/a?"></textarea>
+                    <button id="btn-2" class="faro-btn-big faro-btn-primary">Continuar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 3: REALISTA -->
+        <section id="s-3" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">Ahora: ¿qué es lo que PROBABLEMENTE va a pasar?</h2>
+                    <textarea id="campo-realista" class="faro-textarea"></textarea>
+                    <button id="btn-3" class="faro-btn-big faro-btn-primary">Ver los tres escenarios</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA FINAL: TRES ESCENARIOS -->
+        <section id="s-final" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">Tus tres futuros posibles</h2>
+
+                    <!-- Pesimista: tono cálido oscuro -->
+                    <button class="w-full p-5 rounded-2xl text-left escenario" data-tipo="pesimista"
+                            style="background: color-mix(in srgb, var(--color-secondary) 25%, var(--faro-card-bg)); border: 1.5px solid var(--color-secondary);">
+                        <span class="text-xs font-semibold uppercase tracking-wide block mb-1" style="color: var(--color-secondary);">Pesimista</span>
+                        <span id="texto-pesimista" class="text-base text-base-content"></span>
+                    </button>
+
+                    <!-- Optimista: tono cálido claro -->
+                    <button class="w-full p-5 rounded-2xl text-left escenario" data-tipo="optimista"
+                            style="background: color-mix(in srgb, var(--color-accent) 22%, var(--faro-card-bg)); border: 1.5px solid var(--color-accent);">
+                        <span class="text-xs font-semibold uppercase tracking-wide block mb-1" style="color: var(--color-warning);">Optimista</span>
+                        <span id="texto-optimista" class="text-base text-base-content"></span>
+                    </button>
+
+                    <!-- Realista: neutro, resaltado como el más probable -->
+                    <button class="w-full p-5 rounded-2xl text-left escenario" data-tipo="realista"
+                            style="background: var(--faro-card-bg); border: 2.5px solid var(--color-primary); box-shadow: 0 6px 20px -8px color-mix(in srgb, var(--color-primary) 50%, transparent);">
+                        <span class="text-xs font-semibold uppercase tracking-wide block mb-1 text-primary">Realista · el más probable</span>
+                        <span id="texto-realista" class="text-base text-base-content"></span>
+                    </button>
+
+                    <p class="faro-instruction text-center font-medium text-base-content pt-2">¿Cuál de estos tres estabas viviendo como si fuera seguro? Tócalo.</p>
+                    <p id="respuesta-final" class="hidden faro-instruction text-center p-4 rounded-xl" style="background: var(--faro-success-bg); color: var(--color-success);"></p>
+
+                    <div class="space-y-3">
+                        <button id="btn-otro" class="faro-btn-big faro-btn-ghost">Explorar otro "¿y si...?"</button>
+                        <a href="../index.html" class="faro-btn-big faro-btn-primary">Volver al inicio</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/y-si-positivo.js"></script>
+</body>
+</html>

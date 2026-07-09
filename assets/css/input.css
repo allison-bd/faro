@@ -1,0 +1,29 @@
+/* ============================================================
+   Faro — entrada de compilación de Tailwind + DaisyUI
+   ------------------------------------------------------------
+   Este archivo NO se sirve directamente. Es la fuente que el CLI
+   de Tailwind compila a `faro-base.css` (utilidades de Tailwind
+   + componentes de DaisyUI, minificado).
+
+   Los COLORES y TEMAS de Faro NO se definen aquí: viven en
+   `styles.css`, que cada página carga como segundo <link>,
+   después de `faro-base.css`. Ese orden replica exactamente la
+   cascada anterior (DaisyUI primero, overrides de Faro después),
+   por lo que la paleta y los temas se ven idénticos.
+
+   Para reconstruir tras cambiar clases en HTML o JS:
+     npm run build:css      (una vez, minificado)
+     npm run watch:css      (recompila al guardar, para desarrollar)
+   ============================================================ */
+
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Dónde buscar las clases usadas (HTML + JS que genera markup
+   dinámico: chips, tarjetas, banners, etc.). Rutas relativas a
+   este archivo (assets/css/). */
+@source "../../index.html";
+@source "../../herramientas.html";
+@source "../../sobre-faro.html";
+@source "../../herramientas/**/*.html";
+@source "../js/**/*.js";

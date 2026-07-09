@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="faro-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta desde el futuro · Faro</title>
+    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="../assets/css/faro-base.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="bg-base-100">
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar bg-neutral shadow-sm px-4 lg:px-8 sticky top-0 z-50">
+    <div class="navbar-start">
+        <a href="../index.html" class="flex items-center gap-2 text-neutral-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.5 3h-5z"/><rect x="9.5" y="5" width="5" height="2.5" rx="0.3"/><path d="M10 7.5L8.5 21h7L14 7.5z"/><path d="M9 13.5h6"/><path d="M6 21h12"/><path d="M16 5.5l2.5-1.3M16 6.8l2.6.4M8 5.5L5.5 4.2M8 6.8l-2.6.4"/>
+            </svg>
+            <span class="text-xl font-semibold font-display">Faro</span>
+        </a>
+    </div>
+    <div class="navbar-center hidden md:flex">
+        <ul class="menu menu-horizontal gap-1">
+            <li><a href="../index.html" class="text-neutral-content hover:text-accent">Inicio</a></li>
+            <li><a href="../herramientas.html" class="text-neutral-content hover:text-accent">Herramientas</a></li>
+            <li><a href="../sobre-faro.html" class="text-neutral-content hover:text-accent">Sobre Faro</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end">
+        <button id="theme-toggle" class="btn btn-ghost btn-circle text-neutral-content" aria-label="Cambiar tema">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
+    </div>
+</nav>
+
+<main class="relative overflow-hidden bg-base-200 faro-surface" style="min-height: calc(100vh - 64px);">
+    <div class="tool-bokeh-bg"></div>
+
+    <div class="relative max-w-xl mx-auto px-4 py-8 md:py-12">
+
+        <!-- ENTRADA -->
+        <section id="s-entrada" class="faro-screen active">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h1 class="font-display text-3xl font-semibold text-base-content text-center">Carta desde el futuro</h1>
+                    <p class="faro-instruction text-center" style="color: var(--faro-text-secondary);">
+                        Tu yo futuro ya pasó por esto. Deja que te escriba.
+                    </p>
+                    <div class="space-y-3">
+                        <button id="btn-carta" class="faro-option-card w-full p-5">
+                            <span class="font-semibold text-lg text-primary block">Carta desde mi yo futuro</span>
+                            <span class="text-base" style="color: var(--faro-text-secondary);">Una carta completa, desde 6 meses, 1 año o 5 años adelante.</span>
+                        </button>
+                        <button id="btn-triple" class="faro-option-card w-full p-5">
+                            <span class="font-semibold text-lg text-primary block">Mensaje triple</span>
+                            <span class="text-base" style="color: var(--faro-text-secondary);">Tres mensajes breves: al yo del pasado, del presente y del futuro.</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CARTA: SELECCIÓN DE TIEMPO -->
+        <section id="s-tiempo" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12 text-center">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content">¿Desde cuándo te escribe tu yo futuro?</h2>
+                    <div class="space-y-3">
+                        <button class="faro-btn-big faro-btn-ghost opcion-tiempo" data-tiempo="6 meses">6 meses</button>
+                        <button class="faro-btn-big faro-btn-ghost opcion-tiempo" data-tiempo="1 año">1 año</button>
+                        <button class="faro-btn-big faro-btn-ghost opcion-tiempo" data-tiempo="5 años">5 años</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CARTA: CUERPO -->
+        <section id="s-carta-flujo" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <p id="apertura-carta" class="font-display text-xl italic text-center" style="color: var(--faro-text-secondary);"></p>
+                    <div>
+                        <label class="block font-medium text-base-content mb-2">Lo que quiero que sepas es...</label>
+                        <textarea id="campo-sepas" class="faro-textarea" style="min-height: 5rem;"></textarea>
+                    </div>
+                    <div>
+                        <label class="block font-medium text-base-content mb-2">Lo que me ayudó fue...</label>
+                        <textarea id="campo-ayudo" class="faro-textarea" style="min-height: 5rem;"></textarea>
+                    </div>
+                    <div>
+                        <label class="block font-medium text-base-content mb-2">La cualidad tuya que más te sirvió fue...</label>
+                        <textarea id="campo-cualidad" class="faro-textarea" style="min-height: 5rem;"></textarea>
+                    </div>
+                    <div>
+                        <label class="block font-medium text-base-content mb-2">Lo que desearía haberte dicho en ese momento es...</label>
+                        <textarea id="campo-dicho" class="faro-textarea" style="min-height: 5rem;"></textarea>
+                    </div>
+                    <button id="btn-generar-carta" class="faro-btn-big faro-btn-primary">Leer la carta completa</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- MENSAJE TRIPLE -->
+        <section id="s-triple" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">Mensaje triple</h2>
+                    <div>
+                        <label class="block font-medium text-base-content mb-2">Querido/a yo del pasado...</label>
+                        <textarea id="campo-pasado" class="faro-textarea" style="min-height: 5rem;" placeholder="¿Qué le dirías a ti de antes?"></textarea>
+                    </div>
+                    <div>
+                        <label class="block font-medium text-base-content mb-2">Querido/a yo del presente...</label>
+                        <textarea id="campo-presente" class="faro-textarea" style="min-height: 5rem;" placeholder="¿Qué necesitas escuchar hoy?"></textarea>
+                    </div>
+                    <div>
+                        <label class="block font-medium text-base-content mb-2">Querido/a yo del futuro...</label>
+                        <textarea id="campo-futuro" class="faro-textarea" style="min-height: 5rem;" placeholder="¿Qué le prometes?"></textarea>
+                    </div>
+                    <button id="btn-generar-triple" class="faro-btn-big faro-btn-primary">Ver los tres mensajes</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULTADO -->
+        <section id="s-resultado" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 id="titulo-resultado" class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center"></h2>
+                    <div id="texto-resultado" class="p-6 rounded-2xl faro-instruction leading-relaxed whitespace-pre-line"
+                         style="background: var(--faro-gradient-card); border: 1px solid var(--faro-border); color: var(--color-base-content); font-family: 'Petrona', serif;"></div>
+                    <div class="space-y-3">
+                        <button id="btn-guardar" class="faro-btn-big faro-btn-primary">Guardar en mi álbum</button>
+                        <p id="guardado" class="hidden text-base text-center p-3 rounded-xl" style="background: var(--faro-success-bg); color: var(--color-success);">Guardado en tu Álbum de logros.</p>
+                        <button id="btn-otra" class="faro-btn-big faro-btn-ghost">Escribir otra</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/carta-desde-el-futuro.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="faro-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Qué tipo de pensamiento te atrapa? · Faro</title>
+    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="../assets/css/faro-base.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="bg-base-100">
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar bg-neutral shadow-sm px-4 lg:px-8 sticky top-0 z-50">
+    <div class="navbar-start">
+        <a href="../index.html" class="flex items-center gap-2 text-neutral-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.5 3h-5z"/><rect x="9.5" y="5" width="5" height="2.5" rx="0.3"/><path d="M10 7.5L8.5 21h7L14 7.5z"/><path d="M9 13.5h6"/><path d="M6 21h12"/><path d="M16 5.5l2.5-1.3M16 6.8l2.6.4M8 5.5L5.5 4.2M8 6.8l-2.6.4"/>
+            </svg>
+            <span class="text-xl font-semibold font-display">Faro</span>
+        </a>
+    </div>
+    <div class="navbar-center hidden md:flex">
+        <ul class="menu menu-horizontal gap-1">
+            <li><a href="../index.html" class="text-neutral-content hover:text-accent">Inicio</a></li>
+            <li><a href="../herramientas.html" class="text-neutral-content hover:text-accent">Herramientas</a></li>
+            <li><a href="../sobre-faro.html" class="text-neutral-content hover:text-accent">Sobre Faro</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end">
+        <button id="theme-toggle" class="btn btn-ghost btn-circle text-neutral-content" aria-label="Cambiar tema">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
+    </div>
+</nav>
+
+<main class="relative overflow-hidden bg-base-200 faro-surface" style="min-height: calc(100vh - 64px);">
+    <div class="tool-bokeh-bg"></div>
+
+    <div class="relative max-w-xl mx-auto px-4 py-8 md:py-12">
+
+        <!-- ENTRADA -->
+        <section id="s-entrada" class="faro-screen active">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12 text-center">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-8">
+                    <h1 class="font-display text-3xl font-semibold text-base-content">¿Qué tipo de pensamiento te atrapa?</h1>
+                    <p class="faro-instruction" style="color: var(--faro-text-secondary);">
+                        No todas las mentes dan vueltas de la misma forma. Conocer tu patrón es el primer paso para dejar de obedecerlo.
+                    </p>
+                    <button id="btn-empezar" class="faro-btn-big faro-btn-primary">Empezar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA POR TIPO -->
+        <section id="s-tipo" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6 text-center">
+                    <p id="tipo-posicion" class="text-sm font-semibold uppercase tracking-wide" style="color: var(--faro-text-muted);"></p>
+                    <div id="tipo-ilustracion" class="flex justify-center text-primary"></div>
+                    <h2 id="tipo-nombre" class="font-display text-3xl font-semibold text-base-content"></h2>
+                    <p id="tipo-escenario" class="faro-instruction italic p-4 rounded-xl text-left" style="background: var(--faro-border-subtle); color: var(--faro-text-secondary);"></p>
+                    <p id="tipo-descripcion" class="text-base" style="color: var(--faro-text-secondary);"></p>
+                    <p class="font-medium text-base-content pt-1">¿Esto te suena familiar?</p>
+                    <div class="space-y-2">
+                        <button class="faro-btn-big faro-btn-ghost tipo-respuesta" data-puntos="2">Mucho, me pasa seguido</button>
+                        <button class="faro-btn-big faro-btn-ghost tipo-respuesta" data-puntos="1">A veces</button>
+                        <button class="faro-btn-big faro-btn-ghost tipo-respuesta" data-puntos="0">No, esto no es lo mío</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULTADO -->
+        <section id="s-resultado" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6 text-center">
+                    <h2 id="resultado-titulo" class="font-display text-2xl md:text-3xl font-semibold text-base-content"></h2>
+                    <div id="resultado-detalle" class="space-y-4 text-left"></div>
+                    <div id="resultado-enlaces" class="space-y-3"></div>
+                    <button id="btn-repetir" class="block mx-auto text-base underline" style="color: var(--faro-text-muted);">Hacer el quiz de nuevo</button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/quiz-tipo-pensamiento.js"></script>
+</body>
+</html>

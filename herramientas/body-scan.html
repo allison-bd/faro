@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="faro-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body scan guiado · Faro</title>
+    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="../assets/css/faro-base.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <style>
+        /* Durante la práctica: fondo oscuro, tipografía tenue */
+        body.escaneando main { background: #12102A; transition: background 1.5s ease; }
+        body.escaneando .tool-bokeh-bg { opacity: 0.25; }
+        body.escaneando .tool-stage { background: #1A1430; }
+        body.escaneando #instruccion-scan { color: #E8DCC8; }
+
+        #instruccion-scan { transition: opacity 1.2s ease; opacity: 0; }
+        #instruccion-scan.visible { opacity: 1; }
+    </style>
+</head>
+<body class="bg-base-100">
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar bg-neutral shadow-sm px-4 lg:px-8 sticky top-0 z-50">
+    <div class="navbar-start">
+        <a href="../index.html" class="flex items-center gap-2 text-neutral-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.5 3h-5z"/><rect x="9.5" y="5" width="5" height="2.5" rx="0.3"/><path d="M10 7.5L8.5 21h7L14 7.5z"/><path d="M9 13.5h6"/><path d="M6 21h12"/><path d="M16 5.5l2.5-1.3M16 6.8l2.6.4M8 5.5L5.5 4.2M8 6.8l-2.6.4"/>
+            </svg>
+            <span class="text-xl font-semibold font-display">Faro</span>
+        </a>
+    </div>
+    <div class="navbar-center hidden md:flex">
+        <ul class="menu menu-horizontal gap-1">
+            <li><a href="../index.html" class="text-neutral-content hover:text-accent">Inicio</a></li>
+            <li><a href="../herramientas.html" class="text-neutral-content hover:text-accent">Herramientas</a></li>
+            <li><a href="../sobre-faro.html" class="text-neutral-content hover:text-accent">Sobre Faro</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end">
+        <button id="theme-toggle" class="btn btn-ghost btn-circle text-neutral-content" aria-label="Cambiar tema">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
+    </div>
+</nav>
+
+<main class="relative overflow-hidden bg-base-200 faro-surface" style="min-height: calc(100vh - 64px);">
+    <div class="tool-bokeh-bg"></div>
+
+    <div class="relative max-w-2xl mx-auto px-4 py-8 md:py-12">
+
+        <!-- ENTRADA -->
+        <section id="s-entrada" class="faro-screen active">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h1 class="font-display text-3xl font-semibold text-base-content text-center">Body scan guiado</h1>
+                    <p class="faro-instruction text-center" style="color: var(--faro-text-secondary);">
+                        Recorrer el cuerpo sin cambiar nada. Solo notar.
+                    </p>
+
+                    <div>
+                        <p class="font-medium text-base-content mb-2">Duración</p>
+                        <div class="flex gap-2 flex-wrap" role="radiogroup" aria-label="Duración">
+                            <button class="faro-chip opcion-duracion selected" data-duracion="rapido">Rápido · 5 min</button>
+                            <button class="faro-chip opcion-duracion" data-duracion="medio">Medio · 10 min</button>
+                            <button class="faro-chip opcion-duracion" data-duracion="completo">Completo · 20 min</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-medium text-base-content mb-2">Formato</p>
+                        <div class="flex gap-2 flex-wrap" role="radiogroup" aria-label="Formato">
+                            <button class="faro-chip opcion-formato selected" data-formato="texto">Texto en pantalla</button>
+                            <button class="faro-chip opcion-formato" data-formato="timer">Solo temporizador</button>
+                        </div>
+                        <p class="text-sm mt-2" style="color: var(--faro-text-muted);">"Solo temporizador" es para quienes ya conocen la secuencia.</p>
+                    </div>
+
+                    <button id="btn-comenzar" class="faro-btn-big faro-btn-primary">Comenzar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÁCTICA -->
+        <section id="s-practica" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative grid md:grid-cols-2 gap-8 items-center">
+
+                    <!-- Silueta: la zona activa se ilumina, las recorridas se apagan -->
+                    <div class="flex justify-center">
+                        <svg id="silueta" viewBox="0 0 200 312" width="160" height="250" aria-hidden="true">
+                            <g id="z-cabeza"><path d="M 78 30 A 22 22 0 0 1 122 30 L 122 34 L 78 34 Z" class="faro-body-zone"/></g>
+                            <g id="z-rostro"><rect x="80" y="36" width="40" height="28" rx="12" class="faro-body-zone"/></g>
+                            <g id="z-cuello"><rect x="90" y="66" width="20" height="13" rx="5" class="faro-body-zone"/></g>
+                            <g id="z-hombros"><rect x="56" y="81" width="88" height="15" rx="7" class="faro-body-zone"/></g>
+                            <g id="z-pecho"><rect x="70" y="98" width="60" height="28" rx="9" class="faro-body-zone"/></g>
+                            <g id="z-brazos">
+                                <rect x="40" y="98" width="17" height="60" rx="8" class="faro-body-zone"/>
+                                <rect x="143" y="98" width="17" height="60" rx="8" class="faro-body-zone"/>
+                            </g>
+                            <g id="z-abdomen"><rect x="72" y="128" width="56" height="30" rx="9" class="faro-body-zone"/></g>
+                            <g id="z-manos">
+                                <rect x="38" y="160" width="16" height="26" rx="8" class="faro-body-zone"/>
+                                <rect x="146" y="160" width="16" height="26" rx="8" class="faro-body-zone"/>
+                            </g>
+                            <g id="z-piernas">
+                                <rect x="72" y="162" width="24" height="122" rx="11" class="faro-body-zone"/>
+                                <rect x="104" y="162" width="24" height="122" rx="11" class="faro-body-zone"/>
+                            </g>
+                            <g id="z-pies">
+                                <rect x="70" y="288" width="26" height="12" rx="6" class="faro-body-zone"/>
+                                <rect x="104" y="288" width="26" height="12" rx="6" class="faro-body-zone"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="text-center space-y-6">
+                        <p id="nombre-zona" class="text-sm font-semibold uppercase tracking-wide" style="color: var(--faro-text-muted);"></p>
+                        <p id="instruccion-scan" class="font-display text-2xl leading-snug min-h-28 flex items-center justify-center text-base-content" aria-live="polite"></p>
+
+                        <!-- Anillo del modo "solo temporizador" -->
+                        <div id="anillo-wrap" class="relative inline-block hidden">
+                            <svg width="110" height="110" viewBox="0 0 110 110">
+                                <circle class="faro-ring-track" cx="55" cy="55" r="46" stroke-width="9"/>
+                                <circle id="anillo-zona" class="faro-ring-fill" cx="55" cy="55" r="46" stroke-width="9" stroke-dasharray="289" stroke-dashoffset="289"/>
+                            </svg>
+                        </div>
+
+                        <button id="btn-detener" class="text-base underline" style="color: var(--faro-text-muted);">Detener</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CIERRE -->
+        <section id="s-cierre" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12 text-center">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-8">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content">¿Cómo te sientes?</h2>
+                    <div class="text-6xl font-bold text-primary font-display" id="valor-cierre">5</div>
+                    <input type="range" id="slider-cierre" class="faro-slider" min="0" max="10" value="5" aria-label="Cómo te sientes de 0 a 10">
+                    <div class="flex justify-between text-sm" style="color: var(--faro-text-muted);"><span>0</span><span>10</span></div>
+                    <div class="space-y-3">
+                        <button id="btn-guardar" class="faro-btn-big faro-btn-primary">Guardar</button>
+                        <a href="../index.html" class="faro-btn-big faro-btn-ghost">Volver al inicio</a>
+                    </div>
+                    <p id="guardado" class="hidden text-base p-3 rounded-xl" style="background: var(--faro-success-bg); color: var(--color-success);">Guardado.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/body-scan.js"></script>
+</body>
+</html>

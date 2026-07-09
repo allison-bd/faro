@@ -1,0 +1,81 @@
+/* ============================================================
+   Faro — fuentes auto-alojadas (sin CDN)
+   ------------------------------------------------------------
+   Petrona (serif, títulos) y Karla (sans, cuerpo), servidas
+   desde assets/fonts/ para máxima estabilidad y velocidad:
+   nada depende de fonts.googleapis.com.
+
+   Son exactamente los mismos binarios que servía Google Fonts
+   (vía @fontsource), subconjunto latino — cubre el español y la
+   puntuación usada (— “ ” ¿ ¡ …). `font-display: swap` conserva
+   el mismo comportamiento de intercambio que antes.
+
+   Rutas relativas a este archivo (assets/css/).
+   ============================================================ */
+
+/* ── Petrona (títulos) ── */
+@font-face {
+  font-family: "Petrona";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/petrona-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Petrona";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/petrona-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Petrona";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/petrona-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Petrona";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/petrona-700.woff2") format("woff2");
+}
+
+/* ── Karla (cuerpo) ── */
+@font-face {
+  font-family: "Karla";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../fonts/karla-300.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Karla";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/karla-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Karla";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/karla-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Karla";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/karla-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Karla";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/karla-700.woff2") format("woff2");
+}

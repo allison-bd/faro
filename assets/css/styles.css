@@ -1,0 +1,642 @@
+/* ============================================================
+   FARO — Sistema de color "Atardecer"
+   Fuente de verdad: Paleta de colores Faro.html
+   Modo claro  = Early Sunset (cielo luminoso, dorado cálido)
+   Modo oscuro = Twilight (púrpura profundo, acentos cálidos)
+   ============================================================ */
+
+[data-theme="faro-light"] {
+    color-scheme: light;
+
+    /* Fondos */
+    --color-base-100: #FAF3E8;      /* warm cream — página */
+    --color-base-200: #F2E6D0;      /* sand — secciones, hero */
+    --color-base-300: #EBD9BE;      /* deeper sand — áreas de contraste */
+    --color-base-content: #3A2518;  /* warm espresso */
+
+    /* Colores principales (tokens DaisyUI) */
+    --color-primary: #C8882E;          /* warm amber — CTA principal */
+    --color-primary-content: #FFFDF8;  /* texto sobre CTA (referencia de paleta) */
+    --color-secondary: #8B5A3C;        /* terracotta — secundario */
+    --color-secondary-content: #F5EBD9;
+    --color-accent: #D4A33A;           /* bright gold — highlights */
+    --color-accent-content: #3A2518;
+    --color-neutral: #6B4226;          /* warm umber — nav, footer */
+    --color-neutral-content: #F5EBD9;
+
+    /* Semánticos */
+    --color-info: #6B4226;
+    --color-info-content: #F5EBD9;
+    --color-success: #5A7A4A;
+    --color-success-content: #EDF5E6;
+    --color-warning: #A0742A;
+    --color-warning-content: #FDF3E0;
+    --color-error: #A34838;
+    --color-error-content: #FCEAE6;
+
+    /* Variables Faro (roles finos de la paleta) */
+    --faro-text-secondary: #7A6248;
+    --faro-text-muted: #A8937A;
+    --faro-text-on-dark: #F5EBD9;
+    --faro-accent-purple: #6B4226;   /* títulos, iconos */
+    --faro-accent-gold: #D4A33A;
+    --faro-success-bg: #EDF5E6;
+    --faro-warning-bg: #FDF3E0;
+    --faro-error-bg: #FCEAE6;
+    --faro-border: #E0D0B8;
+    --faro-border-subtle: #EDE3D2;
+    --faro-card-bg: #FFFAF2;
+    --faro-modal-bg: #FFFFFF;
+    --faro-modal-border: #E8DCC8;
+    --faro-tooltip-bg: #3A2518;
+    --faro-tooltip-text: #F5EBD9;
+    --faro-input-bg: #FFFDF8;
+    --faro-input-border: #D8C8B0;
+    --faro-slider-track: #E8DCC8;
+    --faro-slider-fill: #C8882E;
+    --faro-gradient: linear-gradient(135deg, #FAF3E8 0%, #F2DDB8 30%, #E8C488 60%, #D4A060 85%, #C88A40 100%);
+    --faro-gradient-hero: linear-gradient(180deg, #FAF3E8 0%, #F5E2C0 25%, #EDD0A0 50%, #E0B878 75%, #C8882E 100%);
+    --faro-gradient-surface: linear-gradient(160deg, #FAF3E8 0%, #F5E8D0 100%);
+    --faro-gradient-card: linear-gradient(180deg, #FFFDF8 0%, #FAF0E0 100%);
+    --faro-gradient-navbar: linear-gradient(90deg, #6B4226 0%, #8B5A30 50%, #A06830 100%);
+
+    /* Bordes y formas (DaisyUI) */
+    --radius-selector: 1rem;
+    --radius-field: 0.5rem;
+    --radius-box: 0.75rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+}
+
+[data-theme="faro-dark"] {
+    color-scheme: dark;
+
+    /* Fondos */
+    --color-base-100: #1E1528;      /* deep plum night */
+    --color-base-200: #281D35;
+    --color-base-300: #342848;
+    --color-base-content: #F0E4D0;  /* warm cream */
+
+    /* Colores principales (tokens DaisyUI) */
+    --color-primary: #E09058;          /* warm coral — horizon glow */
+    --color-primary-content: #1E1528;
+    --color-secondary: #D4783E;        /* deeper coral */
+    --color-secondary-content: #1E1528;
+    --color-accent: #D4A850;           /* warm gold */
+    --color-accent-content: #1E1528;
+    --color-neutral: #5A2040;          /* plum — nav, footer */
+    --color-neutral-content: #F0E4D0;
+
+    /* Semánticos */
+    --color-info: #B090C8;
+    --color-info-content: #1E1528;
+    --color-success: #7CB06A;
+    --color-success-content: #1A2818;
+    --color-warning: #D4A040;
+    --color-warning-content: #2A2218;
+    --color-error: #D06858;
+    --color-error-content: #2A1818;
+
+    /* Variables Faro (roles finos de la paleta) */
+    --faro-text-secondary: #C0A88E;
+    --faro-text-muted: #8A7468;
+    --faro-text-on-dark: #F0E4D0;
+    --faro-accent-purple: #B090C8;   /* soft lavender — títulos, iconos */
+    --faro-accent-gold: #D4A850;
+    --faro-success-bg: #1A2818;
+    --faro-warning-bg: #2A2218;
+    --faro-error-bg: #2A1818;
+    --faro-border: #3E2E50;
+    --faro-border-subtle: #2E2040;
+    --faro-card-bg: #261C34;
+    --faro-modal-bg: #302444;
+    --faro-modal-border: #402E58;
+    --faro-tooltip-bg: #E09058;
+    --faro-tooltip-text: #1E1528;
+    --faro-input-bg: #221830;
+    --faro-input-border: #3E2E50;
+    --faro-slider-track: #3E2E50;
+    --faro-slider-fill: #E09058;
+    --faro-gradient: linear-gradient(135deg, #1E1528 0%, #2E1E3E 25%, #482848 50%, #683050 70%, #884040 85%, #A06040 100%);
+    --faro-gradient-hero: linear-gradient(180deg, #1E1528 0%, #2A1830 25%, #3E2040 50%, #582848 75%, #7A3848 85%, #A06040 100%);
+    --faro-gradient-surface: linear-gradient(160deg, #1E1528 0%, #281D35 100%);
+    --faro-gradient-card: linear-gradient(180deg, #261C34 0%, #2E2240 100%);
+    --faro-gradient-navbar: linear-gradient(90deg, #5A2040 0%, #6B2848 50%, #7A3050 100%);
+
+    /* Bordes y formas (DaisyUI) */
+    --radius-selector: 1rem;
+    --radius-field: 0.5rem;
+    --radius-box: 0.75rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+}
+
+/* ========================================
+   Tipografía
+   ======================================== */
+
+body {
+    font-family: 'Karla', sans-serif;
+}
+
+.font-display {
+    font-family: 'Petrona', serif;
+}
+
+main p {
+    text-align: left;
+}
+
+/* ============================================================
+   Fidelidad con la referencia de paleta (Claude Design)
+   Roles extraídos del preview de componentes de la paleta.
+   ============================================================ */
+
+/* Navbar: degradado horizontal de la paleta (gradientNavbar) */
+nav.navbar {
+    background-image: var(--faro-gradient-navbar);
+}
+
+/* Superficie dorada de la referencia (gradientSurface), SOLO en modo
+   claro: el fondo gana el tono dorado con degradado sutil del mock de
+   Claude Design. En oscuro no se aplica — quedó fiel y no se toca:
+   el color plano de base se conserva como fallback. */
+[data-theme="faro-light"] .faro-surface {
+    background-image: var(--faro-gradient-surface);
+}
+
+/* Títulos: acento púrpura (rol de paleta: "Títulos, iconos").
+   Umber en claro, lavanda en oscuro. Solo encabezados dentro de
+   <main>: el wordmark del navbar/footer conserva texto sobre oscuro,
+   y los números grandes (sliders, timers) conservan el primario. */
+main h1.font-display,
+main h2.font-display,
+main h3.font-display {
+    color: var(--faro-accent-purple);
+}
+
+/* Título de tarjeta de contenido (índice / sobre Faro) — mismo rol.
+   El ícono hereda currentColor, como indica el rol "títulos, iconos". */
+.faro-card-title {
+    color: var(--faro-accent-purple);
+}
+
+/* Tarjeta de contenido: degradado cálido + borde sutil
+   (paleta: gradientCard — "agrega calidez y profundidad") */
+.faro-content-card {
+    background: var(--faro-gradient-card);
+    border-color: var(--faro-border-subtle);
+}
+.faro-content-card:hover {
+    border-color: color-mix(in srgb, var(--color-primary) 50%, transparent);
+}
+
+/* Botón deshabilitado según la paleta: fondo terciario + texto muted */
+.faro-btn-big:disabled {
+    background: var(--color-base-300);
+    color: var(--faro-text-muted);
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* ============================================================
+   Sistema de pantallas secuenciales (todas las herramientas)
+   Una pantalla visible a la vez, transición con fade suave.
+   ============================================================ */
+
+.faro-screen {
+    display: none;
+}
+
+.faro-screen.active {
+    display: block;
+    animation: faro-screen-in 0.45s ease both;
+}
+
+@keyframes faro-screen-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.faro-fade-out {
+    animation: faro-fade-out 0.35s ease both;
+}
+
+@keyframes faro-fade-out {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Instrucciones de crisis: tipografía grande, siempre ≥ 18px */
+.faro-instruction {
+    font-size: 1.25rem;
+    line-height: 1.6;
+}
+
+/* ============================================================
+   Timer circular (anillo SVG que se llena/vacía)
+   El JS de cada herramienta anima stroke-dashoffset.
+   ============================================================ */
+
+.faro-ring-track {
+    stroke: var(--faro-slider-track);
+    fill: none;
+}
+
+.faro-ring-fill {
+    stroke: var(--faro-slider-fill);
+    fill: none;
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+    transform-origin: center;
+}
+
+/* ============================================================
+   Compactado móvil — maximizar el contenido visible sin scroll.
+   En pantallas chicas se reduce el padding del marco de todas las
+   herramientas (en crisis, cada segundo cuenta). No toca el tamaño
+   del texto ni de los botones: solo recorta espacios, así que no
+   compromete la legibilidad. Las páginas informativas (index, sobre)
+   no se ven afectadas porque su <main> no usa este patrón.
+   ============================================================ */
+@media (max-width: 640px) {
+    main > div[class*="max-w-"] {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+    .tool-stage {
+        padding: 1.25rem !important;
+    }
+}
+
+/* ============================================================
+   Tarjetas de selección (categorías, variantes, escenarios)
+   ============================================================ */
+
+.faro-option-card {
+    background: var(--faro-card-bg);
+    border: 1.5px solid var(--faro-border);
+    border-radius: 1rem;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+}
+
+.faro-option-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 6px 18px -8px color-mix(in srgb, var(--color-neutral) 35%, transparent);
+}
+
+.faro-option-card:active {
+    transform: scale(0.985);
+}
+
+.faro-option-card.selected {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 45%, transparent);
+}
+
+/* Chips de selección múltiple (síntomas, sonidos, señales...) */
+.faro-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 1rem;
+    border-radius: 9999px;
+    border: 1.5px solid var(--faro-border);
+    background: var(--faro-card-bg);
+    color: var(--color-base-content);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.faro-chip.selected {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-primary-content);
+}
+
+/* ============================================================
+   Inputs y sliders con la paleta
+   ============================================================ */
+
+.faro-input,
+.faro-textarea {
+    background: var(--faro-input-bg);
+    border: 1.5px solid var(--faro-input-border);
+    border-radius: 0.75rem;
+    color: var(--color-base-content);
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-size: 1.05rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.faro-textarea {
+    min-height: 7rem;
+    resize: vertical;
+}
+
+.faro-input:focus,
+.faro-textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 25%, transparent);
+}
+
+.faro-input::placeholder,
+.faro-textarea::placeholder {
+    color: var(--faro-text-muted);
+}
+
+input[type="range"].faro-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 9999px;
+    background: var(--faro-slider-track);
+    outline: none;
+}
+
+/* Thumb: borde blanco de 2px como en la referencia de paleta.
+   El tamaño (30px) se mantiene mayor que el del mock (20px) a propósito:
+   es el objetivo táctil para dedos en crisis, en celular. */
+input[type="range"].faro-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--faro-slider-fill);
+    border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+input[type="range"].faro-slider::-moz-range-thumb {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--faro-slider-fill);
+    border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+input[type="range"].faro-slider:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 35%, transparent);
+}
+
+/* Slider vertical (Termómetro emocional) — slider horizontal rotado -90°.
+   Se hace así, y no con writing-mode: vertical, porque writing-mode en
+   <input type="range"> solo funciona en navegadores recientes (Chrome 121+,
+   Firefox 120+); la rotación funciona en cualquier teléfono, incluso antiguos.
+   El wrapper reserva el alto real; el input rota sobre su centro, así el thumb
+   sigue siendo un thumb horizontal normal (posición correcta según el valor). */
+.faro-vslider-wrap {
+    height: 280px;
+    width: 44px;
+    position: relative;
+}
+/* El input se posiciona absoluto y centrado (fuera del flujo, para que ningún
+   flex lo encoja ni su ancho de 280px cause overflow); luego rota -90°.
+   Mayor especificidad que la regla base .faro-slider para que el ancho aplique. */
+.faro-vslider-wrap input[type="range"].faro-slider {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 280px;              /* al rotar -90° se convierte en el alto del track */
+    transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+/* ============================================================
+   Botones grandes de crisis
+   ============================================================ */
+
+.faro-btn-big {
+    display: block;
+    width: 100%;
+    padding: 1.1rem 1.5rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    border-radius: 1rem;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.faro-btn-big:active {
+    transform: scale(0.98);
+}
+
+.faro-btn-primary {
+    background: var(--color-primary);
+    color: var(--color-primary-content);
+    box-shadow: 0 8px 20px -8px color-mix(in srgb, var(--color-primary) 70%, transparent);
+}
+
+.faro-btn-ghost {
+    background: transparent;
+    color: var(--color-base-content);
+    border: 1.5px solid var(--faro-border);
+}
+
+.faro-btn-ghost:hover {
+    border-color: var(--color-primary);
+}
+
+/* ============================================================
+   Animación de "respiración" para texto (Declaraciones A5)
+   4s expandir (inhala) + 4s contraer (exhala)
+   ============================================================ */
+
+@keyframes faro-text-breathe {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.06); }
+}
+
+.faro-breathe {
+    animation: faro-text-breathe 8s ease-in-out infinite;
+}
+
+/* ============================================================
+   Calendario tipo "racha" (B1) y celdas de historial
+   ============================================================ */
+
+.faro-cal-cell {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 0.35rem;
+    background: var(--faro-border-subtle);
+}
+
+.faro-cal-cell.done {
+    background: var(--color-primary);
+}
+
+.faro-cal-cell.today {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 1px;
+}
+
+/* ============================================================
+   Sistema de profundidad para herramientas
+   (base visual reutilizable para todo el catálogo)
+   ============================================================ */
+
+/* Fondo: vidrio translúcido + bokeh cálido, MUY sutil a propósito.
+   Este es el elemento de ambientación de una herramienta de crisis: la
+   persona que la usa puede estar en medio de un ataque de pánico, de noche,
+   en su celular. Prioridad absoluta: baja carga sensorial y predictibilidad.
+   Por eso hay una sola fuente de movimiento por capa (nada de puntos
+   independientes titilando), muy lenta y de bajo contraste. Todo vía
+   color-mix() sobre las variables del tema: se adapta solo a claro/oscuro. */
+.tool-bokeh-bg,
+.tool-bokeh-card {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.tool-bokeh-bg {
+    background-image:
+        radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--color-primary) 14%, transparent) 0%, transparent 55%),
+        radial-gradient(circle at 80% 75%, color-mix(in srgb, var(--color-secondary) 16%, transparent) 0%, transparent 55%),
+        radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--color-accent) 10%, transparent) 0%, transparent 65%);
+    background-repeat: no-repeat;
+    background-size: 160% 160%;
+    background-position: 0% 0%;
+    animation: bokeh-drift-bg 150s ease-in-out infinite alternate;
+}
+
+/* Bokeh de la tarjeta: mismo lenguaje, escala más fina y con más peso dorado,
+   para leerse como una capa distinta y más cercana que el fondo general */
+.tool-bokeh-card {
+    background-image:
+        radial-gradient(circle at 25% 25%, color-mix(in srgb, var(--color-secondary) 18%, transparent) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, color-mix(in srgb, var(--color-primary) 12%, transparent) 0%, transparent 55%);
+    background-repeat: no-repeat;
+    background-size: 140% 140%;
+    background-position: 100% 0%;
+    animation: bokeh-drift-card 130s ease-in-out infinite alternate;
+}
+
+@keyframes bokeh-drift-bg {
+    from { background-position: 0% 0%; }
+    to   { background-position: -12% -8%; }
+}
+
+@keyframes bokeh-drift-card {
+    from { background-position: 100% 0%; }
+    to   { background-position: 88% 10%; }
+}
+
+/* Halo de luz difusa detrás del panel principal (estático, sin animación) */
+.tool-glow {
+    border-radius: 9999px;
+    filter: blur(64px);
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-secondary) 45%, transparent) 0%, transparent 70%);
+}
+
+/* Panel que contiene el ejercicio: opaco y estable a propósito (nada de
+   backdrop-filter ni transform animado — evita el desplazamiento sutil que
+   esa combinación puede producir, y es más liviano en celulares) */
+.tool-stage {
+    background: var(--faro-gradient-card); /* rol de paleta: las tarjetas usan gradientCard */
+    border-radius: 2rem;
+    box-shadow:
+        0 1px 2px color-mix(in srgb, var(--color-neutral) 12%, transparent),
+        0 24px 48px -16px color-mix(in srgb, var(--color-neutral) 40%, transparent),
+        0 0 0 1px color-mix(in srgb, var(--color-primary) 10%, transparent);
+}
+
+/* Brillo especular suave y estático, como luz posándose en una superficie de vidrio */
+.tool-stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255, 248, 235, 0.22) 0%, transparent 40%);
+    pointer-events: none;
+}
+
+[data-theme="faro-dark"] .tool-stage::before {
+    background: linear-gradient(135deg, rgba(224, 144, 88, 0.08) 0%, transparent 40%);
+}
+
+/* El "faro": marcador que viaja con un resplandor cálido, más intenso al sostener */
+.tool-beacon {
+    box-shadow:
+        0 0 12px 3px color-mix(in srgb, var(--color-secondary) 65%, transparent),
+        0 0 4px color-mix(in srgb, var(--color-secondary) 90%, transparent);
+    transition: box-shadow 0.6s ease;
+}
+
+.tool-beacon.beacon-hold {
+    box-shadow:
+        0 0 22px 7px color-mix(in srgb, var(--color-secondary) 85%, transparent),
+        0 0 6px color-mix(in srgb, var(--color-secondary) 95%, transparent);
+}
+
+/* ============================================================
+   Animaciones para respiración (A1)
+   ============================================================ */
+
+@keyframes hold-pulse {
+    0%, 100% { transform: scale(var(--hold-scale)); }
+    50% { transform: scale(calc(var(--hold-scale) + 0.05)); }
+}
+
+@keyframes bounce-number {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+}
+
+/* ============================================================
+   Silueta corporal (A3 relajación muscular, B5 body scan)
+   Zonas SVG que se resaltan/apagan
+   ============================================================ */
+
+.faro-body-zone {
+    fill: var(--faro-border-subtle);
+    stroke: var(--faro-border);
+    stroke-width: 1;
+    transition: fill 0.6s ease;
+}
+
+.faro-body-zone.active {
+    fill: var(--color-primary);
+}
+
+.faro-body-zone.done {
+    fill: color-mix(in srgb, var(--color-success) 45%, var(--faro-border-subtle));
+}
+
+/* ============================================================
+   Accesibilidad de movimiento
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    #circle,
+    #text-scaler,
+    #instruction-text,
+    .tool-bokeh-bg,
+    .tool-bokeh-card,
+    .faro-breathe,
+    .faro-screen.active {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+    }
+}

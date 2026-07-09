@@ -1,0 +1,17 @@
+{
+  "name": "faro",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Faro — herramientas interactivas de salud mental para ansiedad y crisis de pánico",
+  "scripts": {
+    "build:css": "tailwindcss -i assets/css/input.css -o assets/css/faro-base.css --minify",
+    "watch:css": "tailwindcss -i assets/css/input.css -o assets/css/faro-base.css --watch"
+  },
+  "devDependencies": {
+    "@fontsource/karla": "^5.2.8",
+    "@fontsource/petrona": "^5.2.8",
+    "@tailwindcss/cli": "^4.1.0",
+    "daisyui": "^5.0.0",
+    "tailwindcss": "^4.1.0"
+  }
+}

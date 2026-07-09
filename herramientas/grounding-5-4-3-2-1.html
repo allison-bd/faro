@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="faro-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grounding 5-4-3-2-1 · Faro</title>
+    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="../assets/css/faro-base.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <style>
+        /* Variante "Para dormir": todo se atenúa */
+        body.modo-dormir main { background: #12102A; transition: background 2s ease; }
+        body.modo-dormir .tool-bokeh-bg, body.modo-dormir .tool-bokeh-card { opacity: 0.25; }
+        body.modo-dormir .tool-stage { background: #1A1430; }
+        body.modo-dormir #velo-final {
+            position: fixed; inset: 0; background: #000; opacity: 0;
+            pointer-events: none; transition: opacity 8s ease; z-index: 40;
+        }
+        body.modo-dormir #velo-final.caer { opacity: 0.92; }
+
+        /* Instrucción que se desvanece suavemente en modo dormir */
+        @keyframes instruccion-dormir {
+            0% { opacity: 0; } 12% { opacity: 1; } 82% { opacity: 1; } 100% { opacity: 0.15; }
+        }
+        .instruccion-dormir { animation: instruccion-dormir 10s ease both; }
+
+        /* Puntos por contar en cada sentido */
+        .punto-sentido {
+            width: 3rem; height: 3rem; border-radius: 9999px;
+            border: 2px solid var(--faro-border);
+            background: var(--faro-card-bg);
+            transition: all 0.35s ease;
+        }
+        .punto-sentido.notado {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            transform: scale(1.08);
+        }
+
+        /* Indicador superior: los 5 sentidos que se completan */
+        .icono-progreso { opacity: 0.35; transition: all 0.4s ease; }
+        .icono-progreso.actual { opacity: 1; color: var(--color-primary); transform: scale(1.15); }
+        .icono-progreso.hecho { opacity: 1; color: var(--color-success); }
+    </style>
+</head>
+<body class="bg-base-100">
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar bg-neutral shadow-sm px-4 lg:px-8 sticky top-0 z-50">
+    <div class="navbar-start">
+        <a href="../index.html" class="flex items-center gap-2 text-neutral-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.5 3h-5z"/><rect x="9.5" y="5" width="5" height="2.5" rx="0.3"/><path d="M10 7.5L8.5 21h7L14 7.5z"/><path d="M9 13.5h6"/><path d="M6 21h12"/><path d="M16 5.5l2.5-1.3M16 6.8l2.6.4M8 5.5L5.5 4.2M8 6.8l-2.6.4"/>
+            </svg>
+            <span class="text-xl font-semibold font-display">Faro</span>
+        </a>
+    </div>
+    <div class="navbar-center hidden md:flex">
+        <ul class="menu menu-horizontal gap-1">
+            <li><a href="../index.html" class="text-neutral-content hover:text-accent">Inicio</a></li>
+            <li><a href="../herramientas.html" class="text-neutral-content hover:text-accent">Herramientas</a></li>
+            <li><a href="../sobre-faro.html" class="text-neutral-content hover:text-accent">Sobre Faro</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end">
+        <button id="theme-toggle" class="btn btn-ghost btn-circle text-neutral-content" aria-label="Cambiar tema">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
+    </div>
+</nav>
+
+<div id="velo-final" aria-hidden="true"></div>
+
+<main class="relative overflow-hidden bg-base-200 faro-surface" style="min-height: calc(100vh - 64px);">
+    <div class="tool-bokeh-bg"></div>
+    <div class="tool-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" style="width: 480px; height: 480px;"></div>
+
+    <div class="relative max-w-xl mx-auto px-4 py-8 md:py-12">
+
+        <!-- Indicador de progreso: los 5 sentidos -->
+        <div id="progreso-sentidos" class="hidden justify-center gap-5 mb-6" aria-hidden="true">
+            <svg class="icono-progreso" data-sentido="0" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="icono-progreso" data-sentido="1" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11V6a1.5 1.5 0 0 1 3 0v4"/><path d="M11 10.5V4.5a1.5 1.5 0 0 1 3 0V10"/><path d="M14 10V6a1.5 1.5 0 0 1 3 0v6"/><path d="M17 12V9.5a1.5 1.5 0 0 1 3 0V14a6 6 0 0 1-6 6h-2c-2 0-3-.5-4.5-2.5L5 14c-.7-1-.5-2 .5-2.3.8-.2 1.5.1 2 .8l1 1.5"/></svg>
+            <svg class="icono-progreso" data-sentido="2" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 1 1-7 0"/><path d="M15 8.5a2.5 2.5 0 0 0-5 0v1a2 2 0 1 1 0 4"/></svg>
+            <svg class="icono-progreso" data-sentido="3" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-2 4-4 6-4 9.5a4 4 0 0 0 8 0C16 9 14 7 12 3z"/><path d="M8 18c1.5 1.5 2.5 2 4 3 1.5-1 2.5-1.5 4-3"/></svg>
+            <svg class="icono-progreso" data-sentido="4" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.2A4.8 4.8 0 0 0 13.6 5l-1.6 1.6L10.4 5A4.8 4.8 0 0 0 2 8.8c0 2 1.5 3.7 3 5.2l7 6.5z"/></svg>
+        </div>
+        <p id="anuncio" class="sr-only" aria-live="polite"></p>
+
+        <!-- ENTRADA -->
+        <section id="s-entrada" class="faro-screen active">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h1 class="font-display text-3xl font-semibold text-base-content text-center">Grounding 5-4-3-2-1</h1>
+                    <p class="faro-instruction text-center" style="color: var(--faro-text-secondary);">
+                        Tus sentidos pueden traerte de vuelta al presente.
+                    </p>
+                    <div class="space-y-3">
+                        <button id="btn-clasico" class="faro-option-card w-full p-5">
+                            <span class="font-semibold text-lg text-primary">Ahora mismo</span>
+                            <span class="block text-base mt-1" style="color: var(--faro-text-secondary);">Con lo que hay a tu alrededor. Tú marcas el ritmo.</span>
+                        </button>
+                        <button id="btn-dormir" class="faro-option-card w-full p-5">
+                            <span class="font-semibold text-lg text-primary">Para dormir</span>
+                            <span class="block text-base mt-1" style="color: var(--faro-text-secondary);">Con lugares imaginados. Avanza solo, tú solo sigue.</span>
+                        </button>
+                    </div>
+                    <div class="p-4 rounded-xl text-base" style="background: var(--faro-warning-bg); color: var(--color-warning);">
+                        <strong>Consejo:</strong> practica esta técnica 2-3 semanas en momentos de calma antes
+                        de usarla en crisis. Así, cuando la necesites, tu cerebro ya conocerá el camino.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EJERCICIO -->
+        <section id="s-ejercicio" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-8 text-center">
+                    <div id="icono-sentido" class="flex justify-center text-primary"></div>
+                    <p id="instruccion" class="font-display text-2xl md:text-3xl leading-snug text-base-content"></p>
+                    <p id="sub-instruccion" class="faro-instruction" style="color: var(--faro-text-secondary);"></p>
+
+                    <!-- Puntos: uno por cada cosa que hay que notar -->
+                    <div id="puntos" class="flex justify-center gap-3 flex-wrap"></div>
+
+                    <div id="controles-clasico" class="space-y-3">
+                        <button id="btn-notar" class="faro-btn-big faro-btn-primary">Ya noté una</button>
+                        <button id="btn-saltar" class="block mx-auto text-base underline" style="color: var(--faro-text-muted);">Pasar al siguiente sentido</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CIERRE -->
+        <section id="s-cierre" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12 text-center">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-8">
+                    <div class="flex justify-center text-success">
+                        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+                    </div>
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content">Volviste al presente</h2>
+                    <p class="faro-instruction" style="color: var(--faro-text-secondary);">
+                        Tus cinco sentidos siguen aquí, contigo. Puedes usarlos cada vez que la mente se vaya a un lugar difícil.
+                    </p>
+                    <div class="space-y-3">
+                        <button id="btn-repetir" class="faro-btn-big faro-btn-ghost">Hacerlo de nuevo</button>
+                        <a href="../index.html" class="faro-btn-big faro-btn-primary">Volver al inicio</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/grounding.js"></script>
+</body>
+</html>

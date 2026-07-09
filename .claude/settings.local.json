@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(\\(Get-Content \"catalogo_herramientas.md\" | Measure-Object -Line\\).Lines; \\(Get-Item \"catalogo_herramientas.md\"\\).Length)",
+      "PowerShell($line = \\(Get-Content \"Paleta de colores Faro.html\"\\)[178]; $m = [regex]::Match\\($line, \"\\(?s\\)\\(const|let|var|palettes|light|claro\\).{0,80}bgPrimary\"\\); $idx = $line.IndexOf\\('bgPrimary'\\); $start = [Math]::Max\\(0, $idx - 400\\); $line.Substring\\($start, 3500\\))",
+      "PowerShell($line = \\(Get-Content \"Paleta de colores Faro.html\"\\)[178]; $idx = $line.IndexOf\\('DARK MODE'\\); $line.Substring\\($idx, 2600\\))",
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(node \"C:/Users/alyry/AppData/Local/Temp/claude/C--Aly-Proyectos-personales-claude-2-0-Faro/7abbd42e-bec7-4edb-8e80-4b698011a767/scratchpad/audit.mjs\")",
+      "Bash(sed -i 's/height=\"72\"/height=\"50\"/g; s/faro-option-card p-2 text-center/faro-option-card p-2 text-center/g; s/faro-option-card p-3 text-center/faro-option-card p-2 text-center/g' assets/js/visualizacion-lugar-seguro.js)",
+      "Bash(sed -i 's/block mt-2\">/block mt-1\">/g' assets/js/visualizacion-lugar-seguro.js)",
+      "Bash(node \"C:/Users/alyry/AppData/Local/Temp/claude/C--Aly-Proyectos-personales-claude-2-0-Faro/7abbd42e-bec7-4edb-8e80-4b698011a767/scratchpad/text-audit.mjs\")",
+      "Bash(node \"C:/Users/alyry/AppData/Local/Temp/claude/C--Aly-Proyectos-personales-claude-2-0-Faro/7abbd42e-bec7-4edb-8e80-4b698011a767/scratchpad/wiring-check.mjs\")",
+      "PowerShell($line = \\(Get-Content \"Paleta de colores Faro.html\"\\)[178]; $idx = $line.IndexOf\\('Vista previa de componentes'\\); $line.Substring\\($idx, 4200\\))",
+      "PowerShell($line = \\(Get-Content \"Paleta de colores Faro.html\"\\)[178]; $idx = $line.IndexOf\\('headingColor'\\); $start = [Math]::Max\\(0, $idx - 200\\); $line.Substring\\($start, 3000\\))",
+      "PowerShell($line = \\(Get-Content \"Paleta de colores Faro.html\"\\)[178]; $m = [regex]::Matches\\($line, 'headingColor'\\); $m | ForEach-Object { $_.Index } | ForEach-Object { \"$_\" })",
+      "PowerShell($line = \\(Get-Content \"Paleta de colores Faro.html\"\\)[178]; $line.Substring\\(36300, 2600\\))",
+      "PowerShell($line = \\(Get-Content \"Paleta de colores Faro.html\"\\)[178]; \"len=$\\($line.Length\\)\"; $line.Substring\\(36300, [Math]::Min\\(2600, $line.Length - 36300\\)\\))",
+      "PowerShell($line = \\(Get-Content \"Paleta de colores Faro.html\"\\)[178]; $idx = $line.IndexOf\\('Nivel de ansiedad'\\); $start = [Math]::Max\\(0, $idx - 300\\); $line.Substring\\($start, 1600\\))",
+      "Bash(node \"C:/Users/alyry/AppData/Local/Temp/claude/C--Aly-Proyectos-personales-claude-2-0-Faro/7abbd42e-bec7-4edb-8e80-4b698011a767/scratchpad/fidelity-swap.mjs\")",
+      "Bash(node \"C:/Users/alyry/AppData/Local/Temp/claude/C--Aly-Proyectos-personales-claude-2-0-Faro/7abbd42e-bec7-4edb-8e80-4b698011a767/scratchpad/restructure.mjs\")",
+      "Bash(xargs grep -l '<main')"
+    ]
+  }
+}

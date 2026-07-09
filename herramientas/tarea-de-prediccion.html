@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="faro-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea de predicción · Faro</title>
+    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="../assets/css/faro-base.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="bg-base-100">
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar bg-neutral shadow-sm px-4 lg:px-8 sticky top-0 z-50">
+    <div class="navbar-start">
+        <a href="../index.html" class="flex items-center gap-2 text-neutral-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.5 3h-5z"/><rect x="9.5" y="5" width="5" height="2.5" rx="0.3"/><path d="M10 7.5L8.5 21h7L14 7.5z"/><path d="M9 13.5h6"/><path d="M6 21h12"/><path d="M16 5.5l2.5-1.3M16 6.8l2.6.4M8 5.5L5.5 4.2M8 6.8l-2.6.4"/>
+            </svg>
+            <span class="text-xl font-semibold font-display">Faro</span>
+        </a>
+    </div>
+    <div class="navbar-center hidden md:flex">
+        <ul class="menu menu-horizontal gap-1">
+            <li><a href="../index.html" class="text-neutral-content hover:text-accent">Inicio</a></li>
+            <li><a href="../herramientas.html" class="text-neutral-content hover:text-accent">Herramientas</a></li>
+            <li><a href="../sobre-faro.html" class="text-neutral-content hover:text-accent">Sobre Faro</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end">
+        <button id="theme-toggle" class="btn btn-ghost btn-circle text-neutral-content" aria-label="Cambiar tema">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
+    </div>
+</nav>
+
+<main class="relative overflow-hidden bg-base-200 faro-surface" style="min-height: calc(100vh - 64px);">
+    <div class="tool-bokeh-bg"></div>
+
+    <div class="relative max-w-xl mx-auto px-4 py-8 md:py-12">
+
+        <!-- RESOLVER PREDICCIÓN PENDIENTE -->
+        <section id="s-resolver" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <p class="text-sm font-semibold uppercase tracking-wide text-center" style="color: var(--faro-text-muted);">Predicción pendiente</p>
+                    <h1 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">
+                        Te propusiste: <span id="objetivo-pendiente" class="text-primary"></span>
+                    </h1>
+                    <div>
+                        <label for="campo-que-paso" class="block font-medium text-base-content mb-2">¿Qué pasó?</label>
+                        <textarea id="campo-que-paso" class="faro-textarea" style="min-height: 5rem;"></textarea>
+                    </div>
+                    <div class="text-center space-y-3">
+                        <label for="slider-real" class="block font-medium text-base-content">¿Cuánto lo lograste?</label>
+                        <div class="text-5xl font-bold text-primary font-display" id="valor-real">5</div>
+                        <input type="range" id="slider-real" class="faro-slider" min="0" max="10" value="5">
+                        <div class="flex justify-between text-sm" style="color: var(--faro-text-muted);"><span>0 · Nada</span><span>10 · Completamente</span></div>
+                    </div>
+                    <button id="btn-resolver" class="faro-btn-big faro-btn-primary">Guardar lo que pasó</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPARACIÓN INMEDIATA -->
+        <section id="s-comparacion" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12 text-center">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-8">
+                    <div class="flex justify-center items-end gap-8 h-44" aria-hidden="true">
+                        <div class="flex flex-col items-center gap-2">
+                            <div id="barra-prediccion" class="w-16 rounded-t-xl" style="background: color-mix(in srgb, var(--color-primary) 40%, transparent); transition: height 1s ease; height: 0;"></div>
+                            <span class="text-sm font-medium" style="color: var(--faro-text-secondary);">Predijiste</span>
+                            <span id="num-prediccion" class="font-bold text-xl text-base-content"></span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2">
+                            <div id="barra-real" class="w-16 rounded-t-xl" style="background: var(--color-primary); transition: height 1s ease 0.4s; height: 0;"></div>
+                            <span class="text-sm font-medium" style="color: var(--faro-text-secondary);">Fue</span>
+                            <span id="num-real" class="font-bold text-xl text-primary"></span>
+                        </div>
+                    </div>
+                    <p id="mensaje-comparacion" class="font-display text-2xl leading-relaxed text-base-content"></p>
+                    <button class="faro-btn-big faro-btn-primary" id="btn-nueva-prediccion">Hacer la predicción de mañana</button>
+                    <button id="btn-historial-1" class="block mx-auto text-base underline" style="color: var(--faro-text-muted);">Ver mi historial</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- NUEVA PREDICCIÓN (pantalla nocturna) -->
+        <section id="s-predecir" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h1 class="font-display text-3xl font-semibold text-base-content text-center">Esta noche, una predicción</h1>
+                    <div>
+                        <label for="campo-objetivo" class="block font-medium text-base-content mb-2">¿Qué te gustaría lograr mañana?</label>
+                        <textarea id="campo-objetivo" class="faro-textarea" style="min-height: 5rem;" placeholder="Ej: ir al supermercado, responder un correo, salir a caminar 15 minutos"></textarea>
+                    </div>
+                    <div class="text-center space-y-3">
+                        <label for="slider-prediccion" class="block font-medium text-base-content">¿Cuánto crees que lo lograrás?</label>
+                        <div class="text-5xl font-bold text-primary font-display" id="valor-prediccion">5</div>
+                        <input type="range" id="slider-prediccion" class="faro-slider" min="0" max="10" value="5">
+                        <div class="flex justify-between text-sm" style="color: var(--faro-text-muted);"><span>0 · Nada</span><span>10 · Completamente</span></div>
+                    </div>
+                    <button id="btn-predecir" class="faro-btn-big faro-btn-primary">Guardar predicción</button>
+                    <p id="prediccion-guardada" class="hidden text-base text-center p-3 rounded-xl" style="background: var(--faro-success-bg); color: var(--color-success);">
+                        Guardada. Mañana en la noche registrarás qué pasó de verdad.
+                    </p>
+                    <button id="btn-historial-2" class="block mx-auto text-base underline" style="color: var(--faro-text-muted);">Ver mi historial</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- HISTORIAL: BARRAS PAREADAS -->
+        <section id="s-historial" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">Predicción vs. realidad</h2>
+                    <p class="text-sm text-center" style="color: var(--faro-text-secondary);">
+                        Barra clara: lo que predijiste. Barra llena: lo que realmente pasó.
+                    </p>
+                    <div id="grafico-pares" class="flex items-end justify-center gap-3 h-44 overflow-x-auto pb-2" role="img" aria-label="Gráfico de barras pareadas: predicción versus realidad"></div>
+                    <p id="conclusion-patron" class="hidden faro-instruction text-center p-4 rounded-xl" style="background: var(--faro-success-bg); color: var(--color-success);"></p>
+                    <p id="historial-vacio" class="hidden faro-instruction text-center" style="color: var(--faro-text-secondary);">
+                        Todavía no hay predicciones completadas. Guarda una esta noche y regístrala mañana.
+                    </p>
+                    <div id="lista-predicciones" class="space-y-2"></div>
+                    <button id="btn-volver" class="faro-btn-big faro-btn-ghost">Volver</button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/tarea-de-prediccion.js"></script>
+</body>
+</html>

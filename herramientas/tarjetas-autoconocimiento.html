@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="faro-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjetas de autoconocimiento · Faro</title>
+    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="../assets/css/faro-base.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <style>
+        /* Tarjeta con volteo */
+        .tarjeta-escena { perspective: 1000px; }
+        .tarjeta-3d {
+            position: relative; width: 100%; min-height: 230px;
+            transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.4, 0.1, 0.2, 1);
+        }
+        .tarjeta-3d.volteada { transform: rotateY(180deg); }
+        .cara {
+            position: absolute; inset: 0; backface-visibility: hidden;
+            border-radius: 1.25rem; display: flex; align-items: center;
+            justify-content: center; padding: 2rem; text-align: center;
+        }
+        .cara-frente {
+            background: var(--faro-gradient-card);
+            border: 1.5px solid var(--faro-border);
+        }
+        .cara-reverso {
+            background: var(--faro-card-bg);
+            border: 1.5px solid var(--color-primary);
+            transform: rotateY(180deg);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .tarjeta-3d { transition: none; }
+        }
+    </style>
+</head>
+<body class="bg-base-100">
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar bg-neutral shadow-sm px-4 lg:px-8 sticky top-0 z-50">
+    <div class="navbar-start">
+        <a href="../index.html" class="flex items-center gap-2 text-neutral-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.5 3h-5z"/><rect x="9.5" y="5" width="5" height="2.5" rx="0.3"/><path d="M10 7.5L8.5 21h7L14 7.5z"/><path d="M9 13.5h6"/><path d="M6 21h12"/><path d="M16 5.5l2.5-1.3M16 6.8l2.6.4M8 5.5L5.5 4.2M8 6.8l-2.6.4"/>
+            </svg>
+            <span class="text-xl font-semibold font-display">Faro</span>
+        </a>
+    </div>
+    <div class="navbar-center hidden md:flex">
+        <ul class="menu menu-horizontal gap-1">
+            <li><a href="../index.html" class="text-neutral-content hover:text-accent">Inicio</a></li>
+            <li><a href="../herramientas.html" class="text-neutral-content hover:text-accent">Herramientas</a></li>
+            <li><a href="../sobre-faro.html" class="text-neutral-content hover:text-accent">Sobre Faro</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end">
+        <button id="theme-toggle" class="btn btn-ghost btn-circle text-neutral-content" aria-label="Cambiar tema">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
+    </div>
+</nav>
+
+<main class="relative overflow-hidden bg-base-200 faro-surface" style="min-height: calc(100vh - 64px);">
+    <div class="tool-bokeh-bg"></div>
+
+    <div class="relative max-w-xl mx-auto px-4 py-8 md:py-12">
+
+        <!-- JUEGO DE TARJETAS -->
+        <section id="s-juego" class="faro-screen active">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h1 class="font-display text-3xl font-semibold text-base-content text-center">Tarjetas de autoconocimiento</h1>
+
+                    <div class="tarjeta-escena">
+                        <div id="tarjeta" class="tarjeta-3d">
+                            <div class="cara cara-frente">
+                                <div class="space-y-3">
+                                    <svg class="mx-auto text-primary" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="4" width="12" height="16" rx="1.5" transform="rotate(-6 12 12)"/><rect x="6" y="4" width="12" height="16" rx="1.5"/></svg>
+                                    <p class="faro-instruction" style="color: var(--faro-text-secondary);">Toca la tarjeta para descubrir tu pregunta</p>
+                                </div>
+                            </div>
+                            <div class="cara cara-reverso">
+                                <div class="space-y-2">
+                                    <p id="categoria-tarjeta" class="text-xs font-semibold uppercase tracking-wide" style="color: var(--faro-text-muted);"></p>
+                                    <p id="pregunta-tarjeta" class="font-display text-2xl leading-snug text-base-content"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="zona-respuesta" class="hidden space-y-3">
+                        <textarea id="campo-respuesta" class="faro-textarea" placeholder="Escribe lo primero que aparezca..."></textarea>
+                        <button id="btn-guardar" class="faro-btn-big faro-btn-primary">Guardar en mi álbum</button>
+                        <div class="flex justify-center gap-4">
+                            <button id="btn-otra" class="faro-chip">Otra pregunta</button>
+                            <button id="btn-saltar" class="faro-chip">Saltar</button>
+                        </div>
+                        <p id="guardado" class="hidden text-base text-center p-3 rounded-xl" style="background: var(--faro-success-bg); color: var(--color-success);">Guardada.</p>
+                    </div>
+
+                    <button id="btn-album" class="block mx-auto text-base underline" style="color: var(--faro-text-muted);">Abrir mi álbum de autoconocimiento</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ÁLBUM -->
+        <section id="s-album" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-6 md:p-10">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">Tu álbum de autoconocimiento</h2>
+                    <p id="album-vacio" class="hidden faro-instruction text-center" style="color: var(--faro-text-secondary);">
+                        Aún está vacío. Cada respuesta que guardes se ordenará aquí por categoría.
+                    </p>
+                    <div id="album-contenido" class="space-y-6"></div>
+                    <button id="btn-volver" class="faro-btn-big faro-btn-ghost">Volver a las tarjetas</button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/tarjetas-autoconocimiento.js"></script>
+</body>
+</html>

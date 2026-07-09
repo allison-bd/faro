@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="faro-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo de crisis · Faro</title>
+    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="../assets/css/faro-base.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="bg-base-100">
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar bg-neutral shadow-sm px-4 lg:px-8 sticky top-0 z-50">
+    <div class="navbar-start">
+        <a href="../index.html" class="flex items-center gap-2 text-neutral-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.5 3h-5z"/><rect x="9.5" y="5" width="5" height="2.5" rx="0.3"/><path d="M10 7.5L8.5 21h7L14 7.5z"/><path d="M9 13.5h6"/><path d="M6 21h12"/><path d="M16 5.5l2.5-1.3M16 6.8l2.6.4M8 5.5L5.5 4.2M8 6.8l-2.6.4"/>
+            </svg>
+            <span class="text-xl font-semibold font-display">Faro</span>
+        </a>
+    </div>
+    <div class="navbar-center hidden md:flex">
+        <ul class="menu menu-horizontal gap-1">
+            <li><a href="../index.html" class="text-neutral-content hover:text-accent">Inicio</a></li>
+            <li><a href="../herramientas.html" class="text-neutral-content hover:text-accent">Herramientas</a></li>
+            <li><a href="../sobre-faro.html" class="text-neutral-content hover:text-accent">Sobre Faro</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end">
+        <button id="theme-toggle" class="btn btn-ghost btn-circle text-neutral-content" aria-label="Cambiar tema">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
+    </div>
+</nav>
+
+<main class="relative overflow-hidden bg-base-200 faro-surface" style="min-height: calc(100vh - 64px);">
+    <div class="tool-bokeh-bg"></div>
+
+    <div class="relative max-w-xl mx-auto px-4 py-8 md:py-14">
+
+        <!-- Indicador de progreso: puntos sutiles, oculto en la entrada -->
+        <div id="progress-dots" class="hidden justify-center gap-2 mb-8" aria-hidden="true">
+            <span class="dot w-2.5 h-2.5 rounded-full" style="background: var(--faro-border);"></span>
+            <span class="dot w-2.5 h-2.5 rounded-full" style="background: var(--faro-border);"></span>
+            <span class="dot w-2.5 h-2.5 rounded-full" style="background: var(--faro-border);"></span>
+            <span class="dot w-2.5 h-2.5 rounded-full" style="background: var(--faro-border);"></span>
+            <span class="dot w-2.5 h-2.5 rounded-full" style="background: var(--faro-border);"></span>
+            <span class="dot w-2.5 h-2.5 rounded-full" style="background: var(--faro-border);"></span>
+            <span class="dot w-2.5 h-2.5 rounded-full" style="background: var(--faro-border);"></span>
+        </div>
+        <p id="progress-label" class="sr-only" aria-live="polite"></p>
+
+        <!-- PANTALLA DE ENTRADA -->
+        <section id="s-entrada" class="faro-screen active">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12 text-center">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-8">
+                    <h1 class="font-display text-3xl md:text-4xl font-semibold text-base-content">
+                        Vamos paso a paso
+                    </h1>
+                    <button class="faro-btn-big faro-btn-primary text-xl py-6" data-goto="1">
+                        Necesito ayuda ahora
+                    </button>
+                    <p class="text-base" style="color: var(--faro-text-secondary);">
+                        Sin cuenta. Sin registro. Solo sigue los pasos.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PASO 1: CAMBIAR LA FISIOLOGÍA -->
+        <section id="s-paso-1" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">
+                        Primero, el cuerpo
+                    </h2>
+                    <p class="faro-instruction text-center" style="color: var(--faro-text-secondary);">
+                        Vamos a bajar la activación física antes que nada.
+                    </p>
+                    <div class="space-y-3">
+                        <a href="relajacion-muscular-progresiva.html" class="faro-option-card block p-5">
+                            <span class="font-semibold text-lg text-primary">Relajación muscular</span>
+                            <span class="block text-base mt-1" style="color: var(--faro-text-secondary);">Tensar y soltar. Guiada, paso a paso.</span>
+                        </a>
+                        <a href="kit-sensorial-de-emergencia.html" class="faro-option-card block p-5">
+                            <span class="font-semibold text-lg text-primary">Kit sensorial</span>
+                            <span class="block text-base mt-1" style="color: var(--faro-text-secondary);">Agua fría, olfato o tacto. Efecto inmediato.</span>
+                        </a>
+                    </div>
+                    <button class="faro-btn-big faro-btn-ghost" data-goto="2">Necesito algo más</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PASO 2: FOCALIZACIÓN SENSORIAL -->
+        <section id="s-paso-2" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6 text-center">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content">
+                        Ancla tus sentidos
+                    </h2>
+                    <p class="faro-instruction" style="color: var(--faro-text-secondary);">
+                        Mira, toca y escucha lo que hay a tu alrededor, ahora.
+                    </p>
+                    <a href="grounding-5-4-3-2-1.html" class="faro-btn-big faro-btn-primary">Voy a probar esto</a>
+                    <button class="faro-btn-big faro-btn-ghost" data-goto="3">Necesito algo más</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PASO 3: RESPIRACIÓN -->
+        <section id="s-paso-3" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6 text-center">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content">
+                        Respira con guía
+                    </h2>
+                    <p class="faro-instruction" style="color: var(--faro-text-secondary);">
+                        No controles tu respiración. Solo sigue el ritmo en pantalla.
+                    </p>
+                    <a href="respiracion-cuadrada.html" class="faro-btn-big faro-btn-primary">Voy a probar esto</a>
+                    <button class="faro-btn-big faro-btn-ghost" data-goto="4">Necesito algo más</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PASO 4: FRASES DE SEGURIDAD -->
+        <section id="s-paso-4" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6 text-center">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content">
+                        Recuerda lo que ya sabes
+                    </h2>
+                    <p class="faro-instruction" style="color: var(--faro-text-secondary);">
+                        Frases con hechos reales que el pánico hace olvidar.
+                    </p>
+                    <a href="declaraciones-de-seguridad.html" class="faro-btn-big faro-btn-primary">Voy a probar esto</a>
+                    <button class="faro-btn-big faro-btn-ghost" data-goto="5">Necesito algo más</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PASO 5: VISUALIZACIÓN -->
+        <section id="s-paso-5" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6 text-center">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content">
+                        Ve a un lugar seguro
+                    </h2>
+                    <p class="faro-instruction" style="color: var(--faro-text-secondary);">
+                        Tu imaginación puede llevarte a un espacio de calma.
+                    </p>
+                    <a href="visualizacion-lugar-seguro.html" class="faro-btn-big faro-btn-primary">Voy a probar esto</a>
+                    <button class="faro-btn-big faro-btn-ghost" data-goto="6">Necesito algo más</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PASO 6: CONTACTO HUMANO -->
+        <section id="s-paso-6" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6 text-center">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content">
+                        Habla con alguien
+                    </h2>
+                    <!-- El contenido se llena desde Red de apoyo (C9) vía localStorage -->
+                    <div id="contacto-lista" class="space-y-3"></div>
+                    <p id="contacto-vacio" class="faro-instruction hidden" style="color: var(--faro-text-secondary);">
+                        Aún no tienes un contacto de apoyo guardado.
+                        Cuando estés más tranquilo/a, puedes configurarlo en
+                        <a href="red-de-apoyo.html" class="text-primary underline">Red de apoyo</a>.
+                    </p>
+                    <button class="faro-btn-big faro-btn-ghost" data-goto="7">Necesito algo más</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PASO 7: AYUDA PROFESIONAL -->
+        <section id="s-paso-7" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6 text-center">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content">
+                        Ayuda profesional, ahora
+                    </h2>
+                    <p class="faro-instruction" style="color: var(--faro-text-secondary);">
+                        Salud Responde atiende 24 horas, todos los días. Es gratuito.
+                    </p>
+                    <a href="tel:6003607777" class="faro-btn-big faro-btn-primary text-xl py-5">
+                        Llamar a Salud Responde<br>
+                        <span class="text-2xl font-bold tracking-wide">600 360 7777</span>
+                    </a>
+                    <button class="faro-btn-big faro-btn-ghost" data-goto="cierre">Terminar el recorrido</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CIERRE -->
+        <section id="s-cierre" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12 text-center">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-8">
+                    <p class="font-display text-2xl md:text-3xl leading-relaxed text-base-content">
+                        Tolerar no es fácil pero sí es posible.<br>Ya lo has hecho antes.
+                    </p>
+                    <div class="space-y-3">
+                        <button class="faro-btn-big faro-btn-ghost" data-goto="1">Repetir el recorrido</button>
+                        <a href="../index.html" class="faro-btn-big faro-btn-primary">Volver al inicio</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Línea de emergencia siempre visible durante el recorrido -->
+        <p id="linea-emergencia" class="hidden text-center mt-6 text-base">
+            <a href="tel:6003607777" class="underline" style="color: var(--faro-text-secondary);">
+                Emergencia: Salud Responde 600 360 7777
+            </a>
+        </p>
+
+    </div>
+</main>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/protocolo-de-crisis.js"></script>
+</body>
+</html>

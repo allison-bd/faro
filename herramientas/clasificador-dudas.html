@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="faro-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificador de dudas · Faro</title>
+    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="../assets/css/faro-base.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="bg-base-100">
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar bg-neutral shadow-sm px-4 lg:px-8 sticky top-0 z-50">
+    <div class="navbar-start">
+        <a href="../index.html" class="flex items-center gap-2 text-neutral-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.5 3h-5z"/><rect x="9.5" y="5" width="5" height="2.5" rx="0.3"/><path d="M10 7.5L8.5 21h7L14 7.5z"/><path d="M9 13.5h6"/><path d="M6 21h12"/><path d="M16 5.5l2.5-1.3M16 6.8l2.6.4M8 5.5L5.5 4.2M8 6.8l-2.6.4"/>
+            </svg>
+            <span class="text-xl font-semibold font-display">Faro</span>
+        </a>
+    </div>
+    <div class="navbar-center hidden md:flex">
+        <ul class="menu menu-horizontal gap-1">
+            <li><a href="../index.html" class="text-neutral-content hover:text-accent">Inicio</a></li>
+            <li><a href="../herramientas.html" class="text-neutral-content hover:text-accent">Herramientas</a></li>
+            <li><a href="../sobre-faro.html" class="text-neutral-content hover:text-accent">Sobre Faro</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end">
+        <button id="theme-toggle" class="btn btn-ghost btn-circle text-neutral-content" aria-label="Cambiar tema">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
+    </div>
+</nav>
+
+<main class="relative overflow-hidden bg-base-200 faro-surface" style="min-height: calc(100vh - 64px);">
+    <div class="tool-bokeh-bg"></div>
+
+    <div class="relative max-w-xl mx-auto px-4 py-8 md:py-12">
+
+        <!-- PANTALLA 1 -->
+        <section id="s-1" class="faro-screen active">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <h1 class="font-display text-3xl font-semibold text-base-content text-center">¿Tu duda tiene salida?</h1>
+                    <label for="campo-duda" class="block font-medium text-base-content">Escribe la duda o pregunta que te tiene atrapado/a.</label>
+                    <textarea id="campo-duda" class="faro-textarea"></textarea>
+                    <button id="btn-1" class="faro-btn-big faro-btn-primary">Continuar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 2: LA PREGUNTA CLAVE -->
+        <section id="s-2" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6">
+                    <p id="eco-duda" class="text-base italic text-center" style="color: var(--faro-text-muted);"></p>
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold leading-snug text-base-content text-center">
+                        Ahora una pregunta clave: ¿esta duda tiene una respuesta que puedas verificar con hechos reales?
+                    </h2>
+                    <div class="space-y-3">
+                        <button id="btn-si" class="faro-btn-big faro-btn-primary">Sí, creo que puedo verificarlo</button>
+                        <button id="btn-no" class="faro-btn-big faro-btn-ghost">No, no hay forma de saberlo con certeza</button>
+                        <button id="btn-nose" class="faro-btn-big faro-btn-ghost">No estoy seguro/a</button>
+                    </div>
+                    <div id="ayuda" class="hidden p-4 rounded-xl faro-instruction" style="background: var(--faro-border-subtle); color: var(--faro-text-secondary);">
+                        ¿Puedes imaginar una prueba, un dato, o una experiencia que resolvería definitivamente esta duda?
+                        Si sí, es decidible. Si no, probablemente es indecidible.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RUTA A: DECIDIBLE -->
+        <section id="s-decidible" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6 text-center">
+                    <div class="flex justify-center text-success">
+                        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+                    </div>
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content">Tu duda tiene respuesta</h2>
+                    <p class="faro-instruction" style="color: var(--faro-text-secondary);">
+                        Estas herramientas pueden ayudarte a examinar la evidencia:
+                    </p>
+                    <div class="space-y-3">
+                        <a href="cuestionamiento-socratico.html" class="faro-btn-big faro-btn-primary">Cuestionamiento socrático</a>
+                        <a href="tres-alternativas.html" class="faro-btn-big faro-btn-ghost">3 Alternativas</a>
+                        <a href="escala-catastrofe.html" class="faro-btn-big faro-btn-ghost">Escala de la catástrofe</a>
+                        <a href="probabilidad-real.html" class="faro-btn-big faro-btn-ghost">Probabilidad real</a>
+                    </div>
+                    <button class="text-base underline" style="color: var(--faro-text-muted);" data-volver>Clasificar otra duda</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- RUTA B: INDECIDIBLE -->
+        <section id="s-indecidible" class="faro-screen">
+            <div class="tool-stage relative overflow-hidden p-8 md:p-12">
+                <div class="tool-bokeh-card"></div>
+                <div class="relative space-y-6 text-center">
+                    <div class="flex justify-center text-primary">
+                        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v18M6 8c4-3 8 3 12 0M6 16c4-3 8 3 12 0" opacity="0.8"/></svg>
+                    </div>
+                    <p class="faro-instruction leading-relaxed" style="color: var(--color-base-content);">
+                        Esta es una pregunta que no tiene respuesta lógica posible. Intentar responderla genera más
+                        preguntas, en un laberinto sin salida. En vez de seguir buscando la respuesta, ¿qué pasaría si
+                        dejaras de responder? La duda, sin respuestas que la alimenten, se agota sola — como un fuego sin leña.
+                    </p>
+                    <div class="space-y-3">
+                        <a href="defusion-cognitiva.html" class="faro-btn-big faro-btn-primary">Defusión cognitiva</a>
+                        <a href="peor-fantasia-catastrofica.html" class="faro-btn-big faro-btn-ghost">Media hora rumiatoria</a>
+                        <a href="silla-rumiatoria.html" class="faro-btn-big faro-btn-ghost">Silla rumiatoria</a>
+                    </div>
+                    <button class="text-base underline" style="color: var(--faro-text-muted);" data-volver>Clasificar otra duda</button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/clasificador-dudas.js"></script>
+</body>
+</html>
