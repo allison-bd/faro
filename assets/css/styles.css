@@ -16,7 +16,10 @@
 
     /* Colores principales (tokens DaisyUI) */
     --color-primary: #C8882E;          /* warm amber — CTA principal */
-    --color-primary-content: #FFFDF8;  /* texto sobre CTA (referencia de paleta) */
+    /* Texto sobre el CTA: espresso, NO el #FFFDF8 del mock. El literal de la
+       referencia rinde 2.9:1 (falla WCAG AA); espresso sobre ámbar rinde 4.8:1.
+       Es el mismo criterio que la propia paleta usa en accent-content. */
+    --color-primary-content: #3A2518;
     --color-secondary: #8B5A3C;        /* terracotta — secundario */
     --color-secondary-content: #F5EBD9;
     --color-accent: #D4A33A;           /* bright gold — highlights */
@@ -184,6 +187,15 @@ main h3.font-display {
 /* Título de tarjeta de contenido (índice / sobre Faro) — mismo rol.
    El ícono hereda currentColor, como indica el rol "títulos, iconos". */
 .faro-card-title {
+    color: var(--faro-accent-purple);
+}
+
+/* Títulos e íconos dentro de tarjetas de opción: acento púrpura.
+   El ámbar como color de texto rinde 2.9:1 sobre la tarjeta (falla WCAG AA);
+   el púrpura de paleta rinde 8.3:1 en claro y la lavanda funciona en oscuro.
+   Se sobreescribe la utilidad text-primary por especificidad (0,2,0 > 0,1,0),
+   cubriendo también las tarjetas que el JS genera dinámicamente. */
+.faro-option-card .text-primary {
     color: var(--faro-accent-purple);
 }
 

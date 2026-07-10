@@ -74,4 +74,11 @@
 
     cargarContactos();
     Faro.Util.trackToolUse("protocolo", "Protocolo de crisis");
+
+    /* Quien llega desde "Necesito ayuda ahora" ya declaró su intención:
+       se salta la pantalla de entrada y parte directo en el paso 1.
+       Quien llega desde el catálogo (sin hash) conserva la entrada. */
+    if (window.location.hash === "#ahora") {
+        irA(1);
+    }
 })();

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faro · Herramientas de calma</title>
-    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <script>(function(){try{var t=localStorage.getItem("faro-theme");if(!t&&window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)t="faro-dark";if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
     <link rel="stylesheet" href="assets/css/fonts.css">
     <link rel="stylesheet" href="assets/css/faro-base.css">
     <link rel="stylesheet" href="assets/css/styles.css">
@@ -73,7 +73,9 @@
                 Herramientas interactivas de calma para momentos de ansiedad, crisis de pánico y pensamientos intrusivos. Sin cuenta, sin espera, sin costo.
             </p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                <a href="herramientas/protocolo-de-crisis.html" class="btn btn-primary btn-lg text-lg shadow-lg">Necesito ayuda ahora</a>
+                <!-- #ahora: la persona ya declaró su intención con este botón;
+                     el protocolo salta la pantalla de entrada y va directo al paso 1 -->
+                <a href="herramientas/protocolo-de-crisis.html#ahora" class="btn btn-primary btn-lg text-lg shadow-lg">Necesito ayuda ahora</a>
                 <a href="herramientas.html" class="btn btn-outline btn-primary btn-lg">Ver herramientas</a>
             </div>
             <!-- Acceso rápido al plan de emergencia (aparece solo si existe) -->
