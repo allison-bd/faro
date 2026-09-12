@@ -70,20 +70,21 @@
                     <h2 id="area-nombre" class="font-display text-3xl font-semibold text-base-content text-center"></h2>
 
                     <div>
-                        <label class="block font-medium text-base-content mb-2">¿Qué tipo de persona quieres ser en esta área?</label>
+                        <label for="campo-persona" class="block font-medium text-base-content mb-2">¿Qué tipo de persona quieres ser en esta área?</label>
                         <input type="text" id="campo-persona" class="faro-input" placeholder="Ej: presente, cariñoso/a, honesto/a">
                     </div>
                     <div>
-                        <label class="block font-medium text-base-content mb-2">¿Qué dirección quieres tomar?</label>
+                        <label for="campo-direccion" class="block font-medium text-base-content mb-2">¿Qué dirección quieres tomar?</label>
                         <input type="text" id="campo-direccion" class="faro-input" placeholder="Ej: estar más presente con mi familia, aprender algo nuevo">
                     </div>
                     <div class="text-center space-y-2">
-                        <label class="block font-medium text-base-content">Del 0 al 10, ¿cuánto estás viviendo según este valor hoy?</label>
+                        <label for="slider-area" class="block font-medium text-base-content">Del 0 al 10, ¿cuánto estás viviendo según este valor hoy?</label>
                         <div class="text-5xl font-bold text-primary font-display" id="valor-area">5</div>
-                        <input type="range" id="slider-area" class="faro-slider" min="0" max="10" value="5">
+                        <input type="range" id="slider-area" class="faro-slider" min="0" max="10" value="5"
+                               aria-label="Cuánto vives según este valor hoy, de 0 a 10">
                     </div>
                     <div>
-                        <label class="block font-medium text-base-content mb-2">¿Qué acción pequeña podrías hacer ESTA SEMANA en esta dirección?</label>
+                        <label for="campo-accion" class="block font-medium text-base-content mb-2">¿Qué acción pequeña podrías hacer ESTA SEMANA en esta dirección?</label>
                         <input type="text" id="campo-accion" class="faro-input" placeholder="Ej: llamar a mi mamá, caminar 15 min, leer 10 páginas">
                     </div>
 

@@ -17,6 +17,7 @@
 
     var variante = null;
     var restante = TOTAL_SEG;
+    var finEn = 0;              /* Date.now() + duración: fin real del temporizador */
     var intervalo = null;
 
     $("btn-fantasia").addEventListener("click", function () { iniciar("fantasia"); });
@@ -38,13 +39,18 @@
         }
 
         Faro.Screens.show("s-sesion");
+        /* Fin real por reloj del sistema: sobrevive al throttling de la pestaña
+           en segundo plano y a la pantalla del móvil bloqueada. El tick solo
+           dibuja el estado; el tiempo lo lleva `Date.now`. */
+        finEn = Date.now() + TOTAL_SEG * 1000;
+        restante = TOTAL_SEG;
         pintarTiempo();
         clearInterval(intervalo);
         intervalo = setInterval(tic, 1000);
     }
 
     function tic() {
-        restante--;
+        restante = Math.max(0, Math.round((finEn - Date.now()) / 1000));
         pintarTiempo();
         if (restante <= 0) {
             clearInterval(intervalo);

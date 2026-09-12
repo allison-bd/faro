@@ -60,8 +60,8 @@
                     <div class="text-center space-y-3">
                         <label for="slider-real" class="block font-medium text-base-content">¿Cuánto lo lograste?</label>
                         <div class="text-5xl font-bold text-primary font-display" id="valor-real">5</div>
-                        <input type="range" id="slider-real" class="faro-slider" min="0" max="10" value="5">
-                        <div class="flex justify-between text-sm" style="color: var(--faro-text-muted);"><span>0 · Nada</span><span>10 · Completamente</span></div>
+                        <input type="range" id="slider-real" class="faro-slider" min="0" max="10" value="5" aria-label="Cuánto lo lograste, de 0 a 10">
+                        <div class="flex justify-between text-sm" style="color: var(--faro-text-secondary);"><span>0 · Nada</span><span>10 · Completamente</span></div>
                     </div>
                     <button id="btn-resolver" class="faro-btn-big faro-btn-primary">Guardar lo que pasó</button>
                 </div>
@@ -87,7 +87,7 @@
                     </div>
                     <p id="mensaje-comparacion" class="font-display text-2xl leading-relaxed text-base-content"></p>
                     <button class="faro-btn-big faro-btn-primary" id="btn-nueva-prediccion">Hacer la predicción de mañana</button>
-                    <button id="btn-historial-1" class="block mx-auto text-base underline" style="color: var(--faro-text-muted);">Ver mi historial</button>
+                    <button id="btn-historial-1" class="block mx-auto text-base underline" style="color: var(--faro-text-secondary);">Ver mi historial</button>
                 </div>
             </div>
         </section>
@@ -105,14 +105,14 @@
                     <div class="text-center space-y-3">
                         <label for="slider-prediccion" class="block font-medium text-base-content">¿Cuánto crees que lo lograrás?</label>
                         <div class="text-5xl font-bold text-primary font-display" id="valor-prediccion">5</div>
-                        <input type="range" id="slider-prediccion" class="faro-slider" min="0" max="10" value="5">
-                        <div class="flex justify-between text-sm" style="color: var(--faro-text-muted);"><span>0 · Nada</span><span>10 · Completamente</span></div>
+                        <input type="range" id="slider-prediccion" class="faro-slider" min="0" max="10" value="5" aria-label="Cuánto crees que lo lograrás mañana, de 0 a 10">
+                        <div class="flex justify-between text-sm" style="color: var(--faro-text-secondary);"><span>0 · Nada</span><span>10 · Completamente</span></div>
                     </div>
                     <button id="btn-predecir" class="faro-btn-big faro-btn-primary">Guardar predicción</button>
                     <p id="prediccion-guardada" class="hidden text-base text-center p-3 rounded-xl" style="background: var(--faro-success-bg); color: var(--color-success);">
                         Guardada. Mañana en la noche registrarás qué pasó de verdad.
                     </p>
-                    <button id="btn-historial-2" class="block mx-auto text-base underline" style="color: var(--faro-text-muted);">Ver mi historial</button>
+                    <button id="btn-historial-2" class="block mx-auto text-base underline" style="color: var(--faro-text-secondary);">Ver mi historial</button>
                 </div>
             </div>
         </section>

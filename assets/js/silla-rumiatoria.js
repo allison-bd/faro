@@ -13,6 +13,7 @@
     var TOTAL_SEG = 10 * 60;
     var CIRC = 578;
     var restante = TOTAL_SEG;
+    var finEn = 0;              /* Date.now() + duración: el tiempo real de fin */
     var intervalo = null;
     var extensionUsada = false;
 
@@ -28,12 +29,19 @@
     });
 
     function iniciarTimer() {
+        /* Calcular desde un timestamp de fin, no decrementando en cada tick.
+           Los navegadores móviles estrangulan setInterval cuando la pestaña
+           pasa a segundo plano o la pantalla se bloquea (típico en un timer
+           de 10 min sin tocar el teléfono). Contando ticks, "10 minutos"
+           se convertían en 15 o no terminaban. Ahora el tick solo dibuja
+           el estado actual — el tiempo real corre en el reloj del sistema. */
+        finEn = Date.now() + TOTAL_SEG * 1000;
         restante = TOTAL_SEG;
         pintar();
         Faro.Screens.show("s-timer");
         clearInterval(intervalo);
         intervalo = setInterval(function () {
-            restante--;
+            restante = Math.max(0, Math.round((finEn - Date.now()) / 1000));
             pintar();
             if (restante <= 0) {
                 clearInterval(intervalo);

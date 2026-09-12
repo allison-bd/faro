@@ -22,7 +22,14 @@
       "Bash(node \"C:/Users/alyry/AppData/Local/Temp/claude/C--Aly-Proyectos-personales-claude-2-0-Faro/7abbd42e-bec7-4edb-8e80-4b698011a767/scratchpad/restructure.mjs\")",
       "Bash(xargs grep -l '<main')",
       "Bash(awk -F: '{s+=$2} END{print \"bloques navbar-end en herramientas: \"s}')",
-      "Bash(node \"C:/Users/alyry/AppData/Local/Temp/claude/C--Aly-Proyectos-personales-claude-2-0-Faro/7abbd42e-bec7-4edb-8e80-4b698011a767/scratchpad/fix4-color-scheme.mjs\")"
+      "Bash(node \"C:/Users/alyry/AppData/Local/Temp/claude/C--Aly-Proyectos-personales-claude-2-0-Faro/7abbd42e-bec7-4edb-8e80-4b698011a767/scratchpad/fix4-color-scheme.mjs\")",
+      "Bash(node \"C:/Users/alyry/AppData/Local/Temp/claude/C--Aly-Proyectos-personales-claude-2-0-Faro/7abbd42e-bec7-4edb-8e80-4b698011a767/scratchpad/fix-a1-muted.mjs\")",
+      "Bash(awk -F: '{s+=$2} END{print \"botones/enlaces: \"s}')",
+      "Bash(awk -F: '{s+=$2} END{print \"escalas 0/10: \"s}')",
+      "Bash(node \"C:/Users/alyry/AppData/Local/Temp/claude/C--Aly-Proyectos-personales-claude-2-0-Faro/7abbd42e-bec7-4edb-8e80-4b698011a767/scratchpad/fix-a2-tel.mjs\")",
+      "Bash(node \"C:/Users/alyry/AppData/Local/Temp/claude/C--Aly-Proyectos-personales-claude-2-0-Faro/7abbd42e-bec7-4edb-8e80-4b698011a767/scratchpad/fix-a4-aria-sliders.mjs\")",
+      "Bash(node \"C:/Users/alyry/AppData/Local/Temp/claude/C--Aly-Proyectos-personales-claude-2-0-Faro/7abbd42e-bec7-4edb-8e80-4b698011a767/scratchpad/fix-a4-labelledby.mjs\")",
+      "Bash(node \"C:/Users/alyry/AppData/Local/Temp/claude/C--Aly-Proyectos-personales-claude-2-0-Faro/7abbd42e-bec7-4edb-8e80-4b698011a767/scratchpad/fix-a5-back.mjs\")"
     ]
   }
 }

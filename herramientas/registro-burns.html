@@ -50,10 +50,10 @@
                 <div class="tool-bokeh-card"></div>
                 <div class="relative space-y-6">
                     <p class="text-sm font-semibold uppercase tracking-wide text-center" style="color: var(--faro-text-muted);">Paso 1 de 5</p>
-                    <h1 class="font-display text-3xl font-semibold text-base-content text-center">¿Qué pasó?</h1>
-                    <textarea id="campo-situacion" class="faro-textarea" placeholder="Describe la situación brevemente: qué estabas haciendo, dónde, con quién."></textarea>
+                    <h1 id="q-situacion" class="font-display text-3xl font-semibold text-base-content text-center">¿Qué pasó?</h1>
+                    <textarea id="campo-situacion" class="faro-textarea" aria-labelledby="q-situacion" placeholder="Describe la situación brevemente: qué estabas haciendo, dónde, con quién."></textarea>
                     <button class="faro-btn-big faro-btn-primary" data-siguiente="s-2">Continuar</button>
-                    <button id="link-historial" class="block mx-auto text-base underline" style="color: var(--faro-text-muted);">Ver mi historial</button>
+                    <button id="link-historial" class="block mx-auto text-base underline" style="color: var(--faro-text-secondary);">Ver mi historial</button>
                 </div>
             </div>
         </section>
@@ -71,6 +71,7 @@
                         <input type="text" id="campo-otra-emocion" class="faro-input" placeholder="Otra emoción (escríbela y aparecerá su control)">
                     </div>
                     <button class="faro-btn-big faro-btn-primary" data-siguiente="s-3">Continuar</button>
+                    <button class="block mx-auto text-base underline" style="color: var(--faro-text-secondary);" data-siguiente="s-1">‹ Volver al paso anterior</button>
                 </div>
             </div>
         </section>
@@ -81,9 +82,10 @@
                 <div class="tool-bokeh-card"></div>
                 <div class="relative space-y-6">
                     <p class="text-sm font-semibold uppercase tracking-wide text-center" style="color: var(--faro-text-muted);">Paso 3 de 5</p>
-                    <h2 class="font-display text-3xl font-semibold leading-snug text-base-content text-center">¿Qué te decías a ti mismo/a en ese momento?</h2>
-                    <textarea id="campo-pensamientos" class="faro-textarea" placeholder="Ej: 'Soy un desastre' / 'Nunca voy a poder' / 'Todos me juzgan'."></textarea>
+                    <h2 id="q-pensamientos" class="font-display text-3xl font-semibold leading-snug text-base-content text-center">¿Qué te decías a ti mismo/a en ese momento?</h2>
+                    <textarea id="campo-pensamientos" class="faro-textarea" aria-labelledby="q-pensamientos" placeholder="Ej: 'Soy un desastre' / 'Nunca voy a poder' / 'Todos me juzgan'."></textarea>
                     <button class="faro-btn-big faro-btn-primary" data-siguiente="s-4">Continuar</button>
+                    <button class="block mx-auto text-base underline" style="color: var(--faro-text-secondary);" data-siguiente="s-2">‹ Volver al paso anterior</button>
                 </div>
             </div>
         </section>
@@ -97,6 +99,7 @@
                     <h2 class="font-display text-3xl font-semibold leading-snug text-base-content text-center">¿Reconoces alguna de estas trampas del pensamiento?</h2>
                     <div id="lista-distorsiones" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
                     <button class="faro-btn-big faro-btn-primary" data-siguiente="s-5">Continuar</button>
+                    <button class="block mx-auto text-base underline" style="color: var(--faro-text-secondary);" data-siguiente="s-3">‹ Volver al paso anterior</button>
                 </div>
             </div>
         </section>
@@ -107,14 +110,15 @@
                 <div class="tool-bokeh-card"></div>
                 <div class="relative space-y-6">
                     <p class="text-sm font-semibold uppercase tracking-wide text-center" style="color: var(--faro-text-muted);">Paso 5 de 5</p>
-                    <h2 class="font-display text-2xl md:text-3xl font-semibold leading-snug text-base-content text-center">Sabiendo lo que sabes ahora, ¿cómo podrías ver esta situación de forma más realista?</h2>
-                    <textarea id="campo-alternativa" class="faro-textarea"></textarea>
+                    <h2 id="q-alternativa" class="font-display text-2xl md:text-3xl font-semibold leading-snug text-base-content text-center">Sabiendo lo que sabes ahora, ¿cómo podrías ver esta situación de forma más realista?</h2>
+                    <textarea id="campo-alternativa" class="faro-textarea" aria-labelledby="q-alternativa"></textarea>
                     <div class="text-center space-y-2">
                         <label class="block font-medium text-base-content">Del 0 al 100, ¿cuánto te crees esta nueva versión?</label>
                         <div class="text-5xl font-bold text-primary font-display"><span id="valor-credibilidad">50</span>%</div>
-                        <input type="range" id="slider-credibilidad" class="faro-slider" min="0" max="100" value="50">
+                        <input type="range" id="slider-credibilidad" class="faro-slider" min="0" max="100" value="50" aria-label="Cuánto te crees esta nueva versión, de 0 a 100 por ciento">
                     </div>
                     <button id="btn-terminar" class="faro-btn-big faro-btn-primary">Ver mi resumen</button>
+                    <button class="block mx-auto text-base underline" style="color: var(--faro-text-secondary);" data-siguiente="s-4">‹ Volver al paso anterior</button>
                 </div>
             </div>
         </section>

@@ -53,7 +53,7 @@
                         La ansiedad no es peligrosa,<br>aunque sí molesta.
                     </p>
                     <button class="faro-btn-big faro-btn-primary" data-siguiente="s-2">Continuar</button>
-                    <button id="link-historial" class="block mx-auto text-base underline" style="color: var(--faro-text-muted);">Ver mi historial</button>
+                    <button id="link-historial" class="block mx-auto text-base underline" style="color: var(--faro-text-secondary);">Ver mi historial</button>
                 </div>
             </div>
         </section>
@@ -66,7 +66,7 @@
                     <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content">¿Cómo de intenso es lo que sientes ahora?</h2>
                     <div class="text-6xl font-bold text-primary font-display" id="valor-inicial">5</div>
                     <input type="range" id="slider-inicial" class="faro-slider" min="0" max="10" value="5" aria-label="Intensidad de 0 a 10">
-                    <div class="flex justify-between text-sm" style="color: var(--faro-text-muted);">
+                    <div class="flex justify-between text-sm" style="color: var(--faro-text-secondary);">
                         <span>0 · Nada</span><span>10 · Lo máximo</span>
                     </div>
                     <p id="fecha-hora" class="text-base" style="color: var(--faro-text-muted);"></p>
@@ -80,9 +80,10 @@
             <div class="tool-stage relative overflow-hidden p-8 md:p-12">
                 <div class="tool-bokeh-card"></div>
                 <div class="relative space-y-6">
-                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">¿Dónde estás?</h2>
-                    <input type="text" id="campo-donde" class="faro-input" placeholder="Ej: en mi pieza, en la micro, en el trabajo">
+                    <h2 id="q-donde" class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">¿Dónde estás?</h2>
+                    <input type="text" id="campo-donde" class="faro-input" aria-labelledby="q-donde" placeholder="Ej: en mi pieza, en la micro, en el trabajo">
                     <button class="faro-btn-big faro-btn-primary" data-siguiente="s-4">Continuar</button>
+                    <button class="block mx-auto text-base underline" style="color: var(--faro-text-secondary);" data-siguiente="s-2">‹ Volver al paso anterior</button>
                 </div>
             </div>
         </section>
@@ -98,6 +99,7 @@
                         <button class="faro-option-card w-full p-5 opcion-compania" data-valor="Estoy con alguien"><span class="font-semibold text-lg text-primary">Estoy con alguien</span></button>
                         <button class="faro-option-card w-full p-5 opcion-compania" data-valor="Estoy en un lugar público"><span class="font-semibold text-lg text-primary">Estoy en un lugar público</span></button>
                     </div>
+                    <button class="block mx-auto text-base underline" style="color: var(--faro-text-secondary);" data-siguiente="s-3">‹ Volver al paso anterior</button>
                 </div>
             </div>
         </section>
@@ -107,9 +109,10 @@
             <div class="tool-stage relative overflow-hidden p-8 md:p-12">
                 <div class="tool-bokeh-card"></div>
                 <div class="relative space-y-6">
-                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">¿Qué estaba pasando cuando empezó?</h2>
-                    <textarea id="campo-contexto" class="faro-textarea" placeholder="Ej: estaba acostada intentando dormir, estaba en una reunión"></textarea>
+                    <h2 id="q-contexto" class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">¿Qué estaba pasando cuando empezó?</h2>
+                    <textarea id="campo-contexto" class="faro-textarea" aria-labelledby="q-contexto" placeholder="Ej: estaba acostada intentando dormir, estaba en una reunión"></textarea>
                     <button class="faro-btn-big faro-btn-primary" data-siguiente="s-6">Continuar</button>
+                    <button class="block mx-auto text-base underline" style="color: var(--faro-text-secondary);" data-siguiente="s-4">‹ Volver al paso anterior</button>
                 </div>
             </div>
         </section>
@@ -134,6 +137,7 @@
                     </div>
                     <input type="text" id="campo-otro-sintoma" class="faro-input" placeholder="Otro (escríbelo aquí)">
                     <button class="faro-btn-big faro-btn-primary" data-siguiente="s-7">Continuar</button>
+                    <button class="block mx-auto text-base underline" style="color: var(--faro-text-secondary);" data-siguiente="s-5">‹ Volver al paso anterior</button>
                 </div>
             </div>
         </section>
@@ -143,9 +147,10 @@
             <div class="tool-stage relative overflow-hidden p-8 md:p-12">
                 <div class="tool-bokeh-card"></div>
                 <div class="relative space-y-6">
-                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">¿Qué te está diciendo tu mente?</h2>
-                    <textarea id="campo-mente" class="faro-textarea" placeholder="Ej: que me voy a morir, que estoy perdiendo el control, que nunca se va a pasar"></textarea>
+                    <h2 id="q-mente" class="font-display text-2xl md:text-3xl font-semibold text-base-content text-center">¿Qué te está diciendo tu mente?</h2>
+                    <textarea id="campo-mente" class="faro-textarea" aria-labelledby="q-mente" placeholder="Ej: que me voy a morir, que estoy perdiendo el control, que nunca se va a pasar"></textarea>
                     <button class="faro-btn-big faro-btn-primary" data-siguiente="s-8">Continuar</button>
+                    <button class="block mx-auto text-base underline" style="color: var(--faro-text-secondary);" data-siguiente="s-6">‹ Volver al paso anterior</button>
                 </div>
             </div>
         </section>
@@ -158,10 +163,11 @@
                     <h2 class="font-display text-2xl md:text-3xl font-semibold text-base-content">¿Cómo de intenso es lo que sientes ahora?</h2>
                     <div class="text-6xl font-bold text-primary font-display" id="valor-final">5</div>
                     <input type="range" id="slider-final" class="faro-slider" min="0" max="10" value="5" aria-label="Intensidad de 0 a 10">
-                    <div class="flex justify-between text-sm" style="color: var(--faro-text-muted);">
+                    <div class="flex justify-between text-sm" style="color: var(--faro-text-secondary);">
                         <span>0 · Nada</span><span>10 · Lo máximo</span>
                     </div>
                     <button id="btn-terminar" class="faro-btn-big faro-btn-primary">Terminar</button>
+                    <button class="block mx-auto text-base underline" style="color: var(--faro-text-secondary);" data-siguiente="s-7">‹ Volver al paso anterior</button>
                 </div>
             </div>
         </section>

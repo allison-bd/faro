@@ -5,6 +5,13 @@
    Modo oscuro = Twilight (púrpura profundo, acentos cálidos)
    ============================================================ */
 
+/* Cuando se salta a un ancla o el foco se mueve por teclado a un elemento
+   arriba del viewport, el navbar sticky (~64-76px) no debe taparlo.
+   72px es un buen valor medio para móvil y desktop. */
+html {
+    scroll-padding-top: 72px;
+}
+
 [data-theme="faro-light"] {
     color-scheme: light;
 
@@ -409,6 +416,16 @@ input[type="range"].faro-slider:focus-visible {
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 35%, transparent);
 }
 
+/* Foco de teclado visible en controles custom. Outline explícito (no ring)
+   para no chocar con el layout de tarjetas de opción ni con los timers/anillos
+   SVG; color del CTA para reforzar identidad visual. */
+.faro-btn-big:focus-visible,
+.faro-option-card:focus-visible,
+.faro-chip:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
 /* Slider vertical (Termómetro emocional) — slider horizontal rotado -90°.
    Se hace así, y no con writing-mode: vertical, porque writing-mode en
    <input type="range"> solo funciona en navegadores recientes (Chrome 121+,
@@ -640,8 +657,6 @@ input[type="range"].faro-slider:focus-visible {
    ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
-    #circle,
-    #text-scaler,
     #instruction-text,
     .tool-bokeh-bg,
     .tool-bokeh-card,
